@@ -34,7 +34,7 @@ set-label:
   fi
   source .auto_devops.sh
   function node_module() {
-      npm install pnpm -g
+      npm install -g pnpm@7.1.5
       pnpm install
       mkdir -p /cache/${CI_PROJECT_NAME}-${CI_PROJECT_ID}-${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHA}
       ls -l /cache
