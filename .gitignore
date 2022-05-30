@@ -1,19 +1,29 @@
-# Mac OS
-.DS_Store
-
-# IDE
-.idea
-.project
-
-
-# npm
 node_modules
-npm-debug.log
-yarn-error.log
-
-# folder
+.DS_Store
 dist
-# 自动更新目录，不要修改此目录里面的内容
-src/app
-.yo-rc.json
-package-lock.json
+.npmrc
+.cache
+
+tests/server/static
+tests/server/static/upload
+
+.local
+# local env files
+.env.local
+.env.*.local
+.eslintcache
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor directories and files
+.idea
+# .vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

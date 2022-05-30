@@ -1,51 +1,59 @@
-image: registry.cn-shanghai.aliyuncs.com/choerodon-tools/cibase:0.9.1
+image: registry.cn-shanghai.aliyuncs.com/c7n/cibase:0.11.3
 
 stages:
-  - build
-  - release
+  - node_build
+  - docker_build
+  - harbor
 
-variables:
-  GIT_SUBMODULE_STRATEGY: recursive
-
-build:
-  stage: build
+node_build:
+  stage: node_build
   script:
-    - node_module demo
+    - node_module vben-base-master
     - node_build build
-    - mv node_modules/choerodon-front-boot/structure ./structure
-    - mv ../Dockerfile  .
-    - docker_build
+    - cp -r dist /cache/${CI_PROJECT_NAME}-${CI_PROJECT_ID}-${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHA}/dist
 
-release:
-  stage: release
+docker_build:
+  stage: docker_build
   script:
+    - docker_build
     - chart_build
 
-.auto_devops: &auto_devops |
-    http_status_code=`curl -o .auto_devops.sh -s -m 10 --connect-timeout 10 -w %{http_code} "${CHOERODON_URL}/devops/ci?token=${Token}&type=front"`
-    if [ "$http_status_code" != "200" ]; then
-      cat .auto_devops.sh
-      exit 1
-    fi
-    source .auto_devops.sh
-    function node_module(){
-        cd ${1} && npm install --registry https://nexus.choerodon.com.cn/repository/choerodon-npm/ --sass-binary-site=http://npm.taobao.org/mirrors/node-sass && cd ..
-        python ./${1}/node_modules/choerodon-front-boot/structure/menu/__init__.py -o yml -m ${1}
-        cd ${1}
-    }
-    
-    function node_build(){
-        chmod -R 777 node_modules
-        npm run ${1:-"build"}
-        find dist -name '*.js' | xargs sed -i "s/localhost:version/$CI_COMMIT_TAG/g"
-    }
+set-label:
+  stage: harbor
+  script:
+    - syn_harbor
+  only:
+    - tags
 
-    function docker_build(){
-        docker login -u ${DOCKER_USER} -p ${DOCKER_PWD} ${DOCKER_REGISTRY}
-        docker build -t ${DOCKER_REGISTRY}/${GROUP_NAME}/${PROJECT_NAME}:${CI_COMMIT_TAG} ${1:-"."}
-        docker push ${DOCKER_REGISTRY}/${GROUP_NAME}/${PROJECT_NAME}:${CI_COMMIT_TAG}
-    }
+.auto_devops: &auto_devops |
+  curl -o .auto_devops.sh \
+      "${CHOERODON_URL}/devops/ci?token=${Token}&type=microservice"
+  if [ $? -ne 0 ];then
+    cat .auto_devops.sh
+    exit 1
+  fi
+  source .auto_devops.sh
+  function node_module() {
+      npm install pnpm -g
+      pnpm install
+      mkdir -p /cache/${CI_PROJECT_NAME}-${CI_PROJECT_ID}-${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHA}
+      ls -l /cache
+  }
+
+  function node_build() {
+      chmod -R 777 node_modules
+      pnpm ${1:-"build"}
+  }
+
+  function docker_build() {
+      cp -r /cache/${CI_PROJECT_NAME}-${CI_PROJECT_ID}-${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHA}/dist ${1:-"./docker"}/dist || true
+      kaniko -c $PWD/docker -f $PWD/docker/Dockerfile -d ${DOCKER_REGISTRY}/${GROUP_NAME}/${PROJECT_NAME}:${CI_COMMIT_TAG}  --skip-tls-verify-registry=registry.c7n.uaes.com
+      rm -rf /cache/${CI_PROJECT_NAME}-${CI_PROJECT_ID}-${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHA}
+  }
+
+  function syn_harbor() {
+      curl -u"admin:uaestfHand123" -X POST "https://${DOCKER_REGISTRY}/api/repositories/${GROUP_NAME}/${PROJECT_NAME}/tags/${CI_COMMIT_TAG}/labels" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 3, \"name\": \"prod\", \"description\": \"\", \"color\": \"#1D5100\", \"scope\": \"g\", \"project_id\": 0, \"creation_time\": \"2020-03-16T05:05:35.013055Z\", \"update_time\": \"2020-03-16T05:05:35.013055Z\", \"deleted\": false }"
+  }
 
 before_script:
   - *auto_devops
-  

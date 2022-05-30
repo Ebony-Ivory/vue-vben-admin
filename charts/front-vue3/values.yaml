@@ -7,19 +7,6 @@ replicaCount: 1
 image:
   repository: registry.cn-hangzhou.aliyuncs.com/choerodon_tf-app-template/front-vue3
 
-preJob:
-  timeout: 300
-  preConfig:
-    enable: true
-    db:
-      host: localhost
-      port: 3306
-      username: choerodon
-      password: 123456
-      dbname: iam_service
-      enabledelete: true
-      upattrs: sort
-
 service:
   name: front-vue3
   enable: false
@@ -32,11 +19,7 @@ ingress:
 env:
   open:
     PRO_API_HOST: api.example.com.cn
-    PRO_CLIENT_ID: example
     PRO_LOCAL: true
-    PRO_TITLE_NAME: Choerodon
-    PRO_HEADER_TITLE_NAME: Choerodon
-    PRO_COOKIE_SERVER: example.com.cn
     PRO_HTTP: http
 
 logs:
