@@ -1,0 +1,34 @@
+{
+  "name": "choerodon-front-demo",
+  "version": "1.0.0",
+  "routeName": "demo",
+  "description": "",
+  "main": "./lib/index.js",
+  "scripts": {
+    "start": "choerodon-front-boot start --config ./react/config.js",
+    "dist": "choerodon-front-boot build --config ./react/config.js",
+    "lint": "npm run lint:es && npm run lint:style",
+    "lint:es": "eslint src/**/*.{js,jsx} ./react/config.js",
+    "lint:style": "stylelint src/**/*.scss --syntax scss",
+    "lint-staged": "lint-staged",
+    "lint-staged:es": "eslint"
+  },
+  "contributors": [
+    "choerodon"
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "@choerodon/boot": "0.19.2",
+    "@choerodon/master": "0.20.0",
+    "rxjs-compat": "^6.5.3"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx}": [
+      "npm run lint-staged:es"
+    ],
+    "src/**/*.scss": "stylelint --syntax scss"
+  },
+  "pre-commit": [
+    "lint-staged"
+  ]
+}
