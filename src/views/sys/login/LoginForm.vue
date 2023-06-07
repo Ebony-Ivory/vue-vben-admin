@@ -25,7 +25,7 @@
       />
     </FormItem>
 
-    <ARow class="enter-x">
+    <ARow class="enter-x" v-if="false">
       <ACol :span="12">
         <FormItem>
           <!-- No logic, you need to deal with it yourself -->
@@ -52,7 +52,7 @@
         {{ t('sys.login.registerButton') }}
       </Button> -->
     </FormItem>
-    <ARow class="enter-x">
+    <ARow class="enter-x" v-if="false">
       <ACol :md="8" :xs="24">
         <Button block @click="setLoginState(LoginStateEnum.MOBILE)">
           {{ t('sys.login.mobileSignInFormTitle') }}
@@ -70,9 +70,9 @@
       </ACol>
     </ARow>
 
-    <Divider class="enter-x">{{ t('sys.login.otherSignIn') }}</Divider>
+    <Divider class="enter-x" v-if="false">{{ t('sys.login.otherSignIn') }}</Divider>
 
-    <div class="flex justify-evenly enter-x" :class="`${prefixCls}-sign-in-way`">
+    <div v-if="false" class="flex justify-evenly enter-x" :class="`${prefixCls}-sign-in-way`">
       <GithubFilled />
       <WechatFilled />
       <AlipayCircleFilled />
