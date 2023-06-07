@@ -147,6 +147,9 @@ export interface GlobConfig {
   urlPrefix?: string;
   // Project abbreviation
   shortName: string;
+  //是否启用联电的域账户登录
+  uaesDomainLogin: boolean;
+
 }
 export interface GlobEnvConfig {
   // Site title
@@ -157,4 +160,7 @@ export interface GlobEnvConfig {
   VITE_GLOB_API_URL_PREFIX?: string;
   // Upload url
   VITE_GLOB_UPLOAD_URL?: string;
+  //是否启用联电的域账户登录
+  VITE_GLOB_UAES_DOMAIN_LOGIN: string;
+
 }

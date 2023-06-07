@@ -1,9 +1,13 @@
 <template>
   <Dropdown placement="bottomLeft" :overlayClassName="`${prefixCls}-dropdown-overlay`">
     <span :class="[prefixCls, `${prefixCls}--${theme}`]" class="flex">
-      <img :class="`${prefixCls}__header`" :src="getUserInfo.avatar" />
+      <!-- <img :class="`${prefixCls}__header`" :src="getUserInfo.avatar" /> -->
+      <Avatar style="background-color: #083a69">
+        <!-- {{ `${getUserInfo.realName}` }} -->
+        <template #icon> <Icon icon="ph:user-bold" :size="20" /></template>
+      </Avatar>
       <span :class="`${prefixCls}__info hidden md:block`">
-        <span :class="`${prefixCls}__name  `" class="truncate">
+        <span :class="`${prefixCls}__name  `" class="truncate ml-2">
           {{ getUserInfo.realName }}
         </span>
       </span>
@@ -36,7 +40,7 @@
 </template>
 <script lang="ts">
   // components
-  import { Dropdown, Menu } from 'ant-design-vue';
+  import { Dropdown, Menu, Avatar } from 'ant-design-vue';
   import type { MenuInfo } from 'ant-design-vue/lib/menu/src/interface';
 
   import { defineComponent, computed } from 'vue';
@@ -54,12 +58,14 @@
   import { openWindow } from '/@/utils';
 
   import { createAsyncComponent } from '/@/utils/factory/createAsyncComponent';
-
+  import Icon from '@/components/Icon/Icon.vue';
   type MenuEvent = 'logout' | 'doc' | 'lock';
 
   export default defineComponent({
     name: 'UserDropdown',
     components: {
+      Avatar,
+      Icon,
       Dropdown,
       Menu,
       MenuItem: createAsyncComponent(() => import('./DropMenuItem.vue')),

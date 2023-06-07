@@ -8,7 +8,10 @@
   >
     <div :class="`${prefixCls}__entry`">
       <div :class="`${prefixCls}__header`">
-        <img :src="avatar" :class="`${prefixCls}__header-img`" />
+        <!-- <img :src="avatar" :class="`${prefixCls}__header-img`" /> -->
+        <Avatar style="background-color: #083a69">
+          <template #icon> <Icon icon="ph:user-bold" :size="20" /></template>
+        </Avatar>
         <p :class="`${prefixCls}__header-name`">
           {{ getRealName }}
         </p>
@@ -25,6 +28,8 @@
   </BasicModal>
 </template>
 <script lang="ts">
+  import { Avatar } from 'ant-design-vue';
+  import Icon from '@/components/Icon/Icon.vue';
   import { defineComponent, computed } from 'vue';
   import { useI18n } from '/@/hooks/web/useI18n';
   import { useDesign } from '/@/hooks/web/useDesign';
@@ -36,7 +41,7 @@
   import headerImg from '/@/assets/images/header.jpg';
   export default defineComponent({
     name: 'LockModal',
-    components: { BasicModal, BasicForm },
+    components: { BasicModal, BasicForm, Avatar, Icon },
 
     setup() {
       const { t } = useI18n();

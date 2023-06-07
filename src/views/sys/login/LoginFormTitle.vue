@@ -1,13 +1,17 @@
 <template>
   <h2 class="mb-3 text-2xl font-bold text-center xl:text-3xl enter-x xl:text-left">
-    {{ getFormTitle }}
+    {{ getFormTitle }}{{ useDomainLoginHintMsg }}
   </h2>
 </template>
 <script lang="ts" setup>
   import { computed, unref } from 'vue';
   import { useI18n } from '/@/hooks/web/useI18n';
   import { LoginStateEnum, useLoginState } from './useLogin';
-
+  import { useGlobSetting } from '/@/hooks/setting';
+  const globSetting = useGlobSetting();
+  const useDomainLoginHintMsg = computed(() =>
+    globSetting?.uaesDomainLogin ? '(邮箱模式)' : '(离线模式)',
+  );
   const { t } = useI18n();
 
   const { getLoginState } = useLoginState();

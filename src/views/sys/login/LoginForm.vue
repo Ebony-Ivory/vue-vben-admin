@@ -101,7 +101,8 @@
   import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from './useLogin';
   import { useDesign } from '/@/hooks/web/useDesign';
   //import { onKeyStroke } from '@vueuse/core';
-
+  import { useGlobSetting } from '/@/hooks/setting';
+  const globSetting = useGlobSetting();
   const ACol = Col;
   const ARow = Row;
   const FormItem = Form.Item;
@@ -116,12 +117,20 @@
 
   const formRef = ref();
   const loading = ref(false);
-  const rememberMe = ref(false);
+  const rememberMe = ref(true);
 
   const formData = reactive({
-    account: 'TEF',
-    password: '123456',
+    account: '',
+    password: '',
   });
+
+  function initForm() {
+    if (!globSetting.uaesDomainLogin) {
+      formData.account = 'TEF';
+      formData.password = '123456';
+    }
+  }
+  initForm();
 
   const { validForm } = useFormValid(formRef);
 

@@ -8,6 +8,8 @@ import {
   PictorialBarChart,
   RadarChart,
   ScatterChart,
+  GaugeChart,
+  EffectScatterChart,
 } from 'echarts/charts';
 
 import {
@@ -25,9 +27,19 @@ import {
   TimelineComponent,
   CalendarComponent,
   GraphicComponent,
+  //标记组件
+  MarkLineComponent,
+  MarkPointComponent,
+  // 数据集组件
+  DatasetComponent,
+  //通过ComposeOption引入?
+  // DatasetComponentOption,
+  // 内置数据转换器组件 (filter, sort)
+  TransformComponent,
 } from 'echarts/components';
 
-import { SVGRenderer } from 'echarts/renderers';
+import { LabelLayout, UniversalTransition } from 'echarts/features';
+import { SVGRenderer, CanvasRenderer } from 'echarts/renderers';
 
 echarts.use([
   LegendComponent,
@@ -52,6 +64,17 @@ echarts.use([
   CalendarComponent,
   GraphicComponent,
   ScatterChart,
+  GaugeChart,
+  EffectScatterChart,
+  // 数据集组件
+  DatasetComponent,
+  // 内置数据转换器组件 (filter, sort)
+  TransformComponent,
+  LabelLayout,
+  UniversalTransition,
+  MarkLineComponent,
+  MarkPointComponent,
+  CanvasRenderer,
 ]);
 
 export default echarts;

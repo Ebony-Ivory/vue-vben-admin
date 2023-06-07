@@ -3,6 +3,11 @@ export const TOKEN_KEY = 'TOKEN__';
 
 export const LOCALE_KEY = 'LOCALE__';
 
+//WxP SSO用
+export const UAES_MENU_CODE_KEY = 'UAES_MENU_CODE__';
+export const UAES_PERM_CODE_KEY = 'UAES_PERM_CODE__';
+
+
 // user info key
 export const USER_INFO_KEY = 'USER__INFO__';
 
