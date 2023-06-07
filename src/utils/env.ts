@@ -18,13 +18,15 @@ export function getStorageShortName() {
 }
 
 export function getAppEnvConfig() {
-  const ENV_NAME = getVariableName(import.meta.env.VITE_GLOB_APP_TITLE);
 
+  const ENV_NAME = getVariableName(import.meta.env.VITE_GLOB_APP_TITLE);
+  console.log('ENV_NAME',typeof ENV_NAME, ENV_NAME);
   const ENV = (import.meta.env.DEV
     ? // Get the global configuration (the configuration will be extracted independently when packaging)
       (import.meta.env as unknown as GlobEnvConfig)
     : window[ENV_NAME as any]) as unknown as GlobEnvConfig;
 
+    console.log('window',typeof window, window);
   const {
     VITE_GLOB_APP_TITLE,
     VITE_GLOB_API_URL,
