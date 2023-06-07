@@ -1,7 +1,11 @@
 import { defineApplicationConfig } from '@vben/vite-config';
+import { loadEnv } from 'vite';
+const root = process.cwd();
+const { VITE_PUBLIC_PATH } = loadEnv(process.env.NODE_ENV || 'local', root);
 
 export default defineApplicationConfig({
   overrides: {
+    base: VITE_PUBLIC_PATH,
     optimizeDeps: {
       include: [
         'echarts/core',
