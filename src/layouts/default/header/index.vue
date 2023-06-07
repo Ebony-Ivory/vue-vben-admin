@@ -1,7 +1,9 @@
 <template>
-  <Header :class="getHeaderClass">
+  <Header :class="getHeaderClass" class="flex-wrap">
     <!-- left start -->
     <div :class="`${prefixCls}-left`">
+      <img class="float-left w-250px" :src="uaesBase64Logo" />
+      <Divider dashed type="vertical" class="!border-gray-400 !h-30px !border-width-1px"></Divider>
       <!-- logo -->
       <AppLogo
         v-if="getShowHeaderLogo || getIsMobile"
@@ -51,7 +53,14 @@
       <UserDropDown :theme="getHeaderTheme" />
 
       <SettingDrawer v-if="getShowSetting" :class="`${prefixCls}-action__item`" />
+      <Divider dashed type="vertical" class="!border-gray-400 !h-30px !border-width-1px"></Divider>
+      <img class="float-right px-2" :src="boschBase64Logo" />
     </div>
+
+    <!-- 联电色带 -->
+    <div class="w-full"
+      ><img :src="logoBaseLineBase64" class="block w-full h-5px ml-[-1px] mt-[-5px]"
+    /></div>
   </Header>
 </template>
 <script lang="ts">
@@ -59,7 +68,7 @@
 
   import { propTypes } from '/@/utils/propTypes';
 
-  import { Layout } from 'ant-design-vue';
+  import { Layout, Divider } from 'ant-design-vue';
   import { AppLogo } from '/@/components/Application';
   import LayoutMenu from '../menu/index.vue';
   import LayoutTrigger from '../trigger/index.vue';
@@ -80,11 +89,16 @@
 
   import { createAsyncComponent } from '/@/utils/factory/createAsyncComponent';
   import { useLocale } from '/@/locales/useLocale';
-
+  import {
+    uaesBase64Logo,
+    boschBase64Logo,
+    logoBaseLineBase64,
+  } from '/@/assets/base64img/logoData';
   export default defineComponent({
     name: 'LayoutHeader',
     components: {
       Header: Layout.Header,
+      Divider: Divider,
       AppLogo,
       LayoutTrigger,
       LayoutBreadcrumb,
@@ -192,6 +206,9 @@
         getShowSettingButton,
         getShowSetting,
         getShowSearch,
+        uaesBase64Logo,
+        boschBase64Logo,
+        logoBaseLineBase64,
       };
     },
   });
