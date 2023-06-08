@@ -1,0 +1,392 @@
+{
+  "title": {
+    "leftText1": "2022 Quality Pyramid (PS)",
+    "leftText2": "2022 质量金字塔(PS)",
+    "centerText": "0-Defects"
+  },
+  "legend": [
+    {
+      "text": "Over target (>10%)\r\n超出目标 (>10%)",
+      "markColor": "#e20015"
+    },
+    {
+      "text": "Over target (≤10%)\r\n超出目标 (≤10%)",
+      "markColor": "#eecc44"
+    },
+    {
+      "text": "Meet target 满足目标",
+      "markColor": "#78be20"
+    }
+  ],
+  "markLine": {
+    "show": true
+  },
+  "colHeader": [
+    {
+      "text": "指标\r\nIndicators",
+      "bgColor": "#2d7eb5",
+      "superscript": ""
+    },
+    {
+      "text": "客户投诉次数\r\nCustomer related\r\n incidents\r\n (CRI, 0km)",
+      "bgColor": "#2d7eb5",
+      "superscript": "1,2,3)"
+    },
+    {
+      "text": "0公里 (PPM)\r\n0km customer view \r\n(PPM)",
+      "bgColor": "#2d7eb5",
+      "superscript": "2,4)"
+    },
+    {
+      "text": "供应商责任\r\n投诉次数\r\nSupplier\r\nresponsibility\r\ndisturbance",
+      "bgColor": "#2d7eb5",
+      "superscript": "1,3)"
+    },
+    {
+      "text": "内部质量损失\r\nInternal\r\ndefect cost\r\n(%-PPC)",
+      "bgColor": "#2d7eb5",
+      "superscript": ""
+    },
+    {
+      "text": "外部质量损失\r\nExternal defect cost\r\n(%-turnover)",
+      "bgColor": "#2d7eb5",
+      "superscript": ""
+    },
+    {
+      "text": "售后产品符合规范\r\n(PPM)\r\nConforming to spec\r\nfield (PPM)",
+      "bgColor": "#2d7eb5",
+      "superscript": "4,5)"
+    },
+    {
+      "text": "售后责任\r\n(PPM)\r\nresponsibility\r\n field (PPM)",
+      "bgColor": "#2d7eb5",
+      "superscript": "4,5)"
+    }
+  ],
+  "rowData": [
+    {
+      "actual": {
+        "headerText": "2021 Result  Dec.  结果",
+        "data": [
+          {
+            "value": 222,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#eecc44"
+          },
+          {
+            "value": 22,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#78be20"
+          },
+          {
+            "value": 3313,
+            "superscript": "*",
+            "subscript": "E",
+            "bgColor": "#78be20"
+          },
+          {
+            "value": 123,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#e20015"
+          },
+          {
+            "value": 44.3,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#78be20"
+          },
+          {
+            "value": 123,
+            "superscript": "**",
+            "subscript": "G",
+            "bgColor": "#e20015"
+          },
+          {
+            "value": 55.4,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#eecc44"
+          },
+          {
+            "value": 87.5,
+            "superscript": "*",
+            "subscript": "E",
+            "bgColor": "#e20015"
+          }
+        ]
+      },
+      "target": {
+        "headerText": "2021 UL Target  目标值",
+        "data": [
+          {
+            "value": 111,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#d9d9d9"
+          },
+          {
+            "value": 111,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#d9d9d9"
+          },
+          {
+            "value": 111,
+            "superscript": "*",
+            "subscript": "E",
+            "bgColor": "#d9d9d9"
+          },
+          {
+            "value": 111,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#d9d9d9"
+          },
+          {
+            "value": 111,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#d9d9d9"
+          },
+          {
+            "value": 111,
+            "superscript": "**",
+            "subscript": "G",
+            "bgColor": "#d9d9d9"
+          },
+          {
+            "value": 111,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#d9d9d9"
+          },
+          {
+            "value": 111,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#d9d9d9"
+          }
+        ]
+      }
+    },
+    {
+      "actual": {
+        "headerText": "2022 Result  Dec.  结果",
+        "data": [
+          {
+            "value": 222,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#eecc44"
+          },
+          {
+            "value": 22,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#78be20"
+          },
+          {
+            "value": 3313,
+            "superscript": "*",
+            "subscript": "E",
+            "bgColor": "#78be20"
+          },
+          {
+            "value": 123,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#e20015"
+          },
+          {
+            "value": 44.3,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#78be20"
+          },
+          {
+            "value": 123,
+            "superscript": "**",
+            "subscript": "G",
+            "bgColor": "#e20015"
+          },
+          {
+            "value": 55.4,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#eecc44"
+          },
+          {
+            "value": 87.5,
+            "superscript": "*",
+            "subscript": "E",
+            "bgColor": "#e20015"
+          }
+        ]
+      },
+      "target": {
+        "headerText": "2022 UL Target  目标值",
+        "data": [
+          {
+            "value": 111,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#d9d9d9"
+          },
+          {
+            "value": 111,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#d9d9d9"
+          },
+          {
+            "value": 111,
+            "superscript": "*",
+            "subscript": "E",
+            "bgColor": "#d9d9d9"
+          },
+          {
+            "value": 111,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#d9d9d9"
+          },
+          {
+            "value": 111,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#d9d9d9"
+          },
+          {
+            "value": 111,
+            "superscript": "**",
+            "subscript": "G",
+            "bgColor": "#d9d9d9"
+          },
+          {
+            "value": 111,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#d9d9d9"
+          },
+          {
+            "value": 111,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#d9d9d9"
+          }
+        ]
+      }
+    },
+    {
+      "actual": {
+        "headerText": "2023 Result  Dec.  结果",
+        "data": [
+          {
+            "value": 222,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#eecc44"
+          },
+          {
+            "value": 22,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#78be20"
+          },
+          {
+            "value": 3313,
+            "superscript": "*",
+            "subscript": "E",
+            "bgColor": "#78be20"
+          },
+          {
+            "value": 123,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#e20015"
+          },
+          {
+            "value": 44.3,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#78be20"
+          },
+          {
+            "value": 123,
+            "superscript": "**",
+            "subscript": "G",
+            "bgColor": "#e20015"
+          },
+          {
+            "value": 55.4,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#eecc44"
+          },
+          {
+            "value": 87.5,
+            "superscript": "*",
+            "subscript": "E",
+            "bgColor": "#e20015"
+          }
+        ]
+      },
+      "target": {
+        "headerText": "2023 UL Target  目标值",
+        "data": [
+          {
+            "value": 111,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#d9d9d9"
+          },
+          {
+            "value": 111,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#d9d9d9"
+          },
+          {
+            "value": 111,
+            "superscript": "*",
+            "subscript": "E",
+            "bgColor": "#d9d9d9"
+          },
+          {
+            "value": 111,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#d9d9d9"
+          },
+          {
+            "value": 111,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#d9d9d9"
+          },
+          {
+            "value": 111,
+            "superscript": "**",
+            "subscript": "G",
+            "bgColor": "#d9d9d9"
+          },
+          {
+            "value": 111,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#d9d9d9"
+          },
+          {
+            "value": 111,
+            "superscript": "",
+            "subscript": "E",
+            "bgColor": "#d9d9d9"
+          }
+        ]
+      }
+    }
+  ]
+}

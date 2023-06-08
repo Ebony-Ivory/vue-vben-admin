@@ -1,6 +1,9 @@
 export default {
-  extends: ['stylelint-config-standard', 'stylelint-config-property-sort-order-smacss'],
-  plugins: ['stylelint-order', 'stylelint-prettier'],
+  // extends: ['stylelint-config-standard', 'stylelint-config-property-sort-order-smacss'],
+  // plugins: ['stylelint-order', 'stylelint-prettier'],
+
+  extends: ['stylelint-config-standard'],
+  plugins: ['stylelint-order'],
   // customSyntax: 'postcss-html',
   overrides: [
     {
@@ -62,7 +65,7 @@ export default {
     'no-descending-specificity': null,
     'font-family-no-missing-generic-family-keyword': null,
     'rule-empty-line-before': [
-      'always',
+      'never',
       {
         ignore: ['after-comment', 'first-nested'],
       },

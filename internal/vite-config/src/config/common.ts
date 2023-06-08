@@ -1,4 +1,4 @@
-import { presetTypography, presetUno } from 'unocss';
+import { presetTypography, presetUno, presetIcons, transformerDirectives } from 'unocss';
 import UnoCSS from 'unocss/vite';
 import { type UserConfig } from 'vite';
 
@@ -19,7 +19,13 @@ const commonConfig: UserConfig = {
   },
   plugins: [
     UnoCSS({
-      presets: [presetUno(), presetTypography()],
+      presets: [presetUno(), presetTypography(), presetIcons()],
+      transformers: [transformerDirectives()],
+      shortcuts: {
+        'common-flex': 'flex justify-center items-center',
+        'common-flex-col': 'flex justify-center items-center flex-col',
+        'border-dev': 'border-1px border-red-500 border-dashed',
+      },
     }),
   ],
 };
