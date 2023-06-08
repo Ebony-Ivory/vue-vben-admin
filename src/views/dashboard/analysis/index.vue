@@ -1,6 +1,5 @@
 <template>
   <div class="p-4">
-    <div>{{ useGlobSetting() }}</div>
     <GrowCard :loading="loading" class="enter-y" />
     <SiteAnalysis class="!my-4 enter-y" :loading="loading" />
     <div class="md:flex enter-y">
@@ -17,7 +16,6 @@
   import VisitSource from './components/VisitSource.vue';
   import VisitRadar from './components/VisitRadar.vue';
   import SalesProductPie from './components/SalesProductPie.vue';
-  import { useGlobSetting } from '/@/hooks/setting';
   const loading = ref(true);
 
   setTimeout(() => {
