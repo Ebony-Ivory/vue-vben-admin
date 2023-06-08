@@ -110,6 +110,7 @@
     .fix-auto-fill input {
       -webkit-text-fill-color: #c9d1d9 !important;
       box-shadow: inherit !important;
+      
     }
   }
 
@@ -188,22 +189,24 @@
     }
 
     input:not([type='checkbox']) {
-      min-width: 360px;
+      @minusWidth:60px;
+      
+      min-width: calc(360px - @minusWidth);
 
       @media (max-width: @screen-xl) {
-        min-width: 320px;
+        min-width: calc(320px - @minusWidth);
       }
 
       @media (max-width: @screen-lg) {
-        min-width: 260px;
+        min-width: calc(260px - @minusWidth);
       }
 
       @media (max-width: @screen-md) {
-        min-width: 240px;
+        min-width: calc(240px - @minusWidth);
       }
 
       @media (max-width: @screen-sm) {
-        min-width: 160px;
+        min-width: calc(160px - @minusWidth);
       }
     }
 

@@ -14,7 +14,11 @@
         v-model:value="formData.account"
         :placeholder="t('sys.login.userName')"
         class="fix-auto-fill"
-      />
+      >
+        <template #addonAfter>
+          <div class="text-[16px]"> @uaes.com </div>
+        </template>
+      </Input>
     </FormItem>
     <FormItem name="password" class="enter-x">
       <InputPassword
