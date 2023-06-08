@@ -22,6 +22,22 @@ const myRoute: AppRouteModule = {
         title: '金字塔',
       },
     },
+    {
+      path: 'vxetable',
+      name: 'Vxetable',
+      component: () => import('/@/views/demo/vxetable/index.vue'),
+      meta: {
+        title: 'VxeTable(vben封装)',
+      },
+    },
+    {
+      path: 'vxetable2',
+      name: 'Vxetable2',
+      component: () => import('/@/views/demo/vxetable/index2.vue'),
+      meta: {
+        title: 'VxeTable原生',
+      },
+    },
   ],
 };
 
