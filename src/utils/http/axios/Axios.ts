@@ -5,7 +5,7 @@ import type {
   AxiosError,
   InternalAxiosRequestConfig,
 } from 'axios';
-import type { RequestOptions, Result, UploadFileParams } from '/#/axios';
+import type { RequestOptions, Result, UploadFileParams, UploadFileListParams } from '/#/axios';
 import type { CreateAxiosOptions } from './axiosTransform';
 import axios from 'axios';
 import qs from 'qs';
@@ -160,6 +160,55 @@ export class VAxios {
       },
     });
   }
+
+  //#region WxP上传多文件接口
+  /**
+   * @description:  WxP上传多文件接口
+   */
+  uploadFileList<T = any>(
+    config: AxiosRequestConfig,
+    params: UploadFileListParams,
+    options?: RequestOptions,
+  ) {
+    const formData = new window.FormData();
+    const customFilename = params.name || 'file';
+    if (params.files) {
+      for (let index = 0; index < params.files.length; index++) {
+        const f = params.files[index];
+        // console.log(`file ${index}`,f);
+        formData.append(customFilename, f);
+      }
+    }
+
+    if (params.data) {
+      Object.keys(params.data).forEach((key) => {
+        const value = params.data![key];
+        if (Array.isArray(value)) {
+          value.forEach((item) => {
+            formData.append(`${key}[]`, item);
+          });
+          return;
+        }
+        formData.append(key, params.data![key]);
+      });
+    }
+    // console.log('uploadFileList', typeof config, config);
+    return this.request<T>(
+      {
+        ...config,
+        method: 'POST',
+        data: formData,
+        headers: {
+          'Content-Type': ContentTypeEnum.FORM_DATA,
+          // // @ts-ignore
+          // ignoreCancelToken: true,
+        },
+      },
+      options,
+    );
+  }
+
+  //#endregion
 
   // support form-data
   supportFormData(config: AxiosRequestConfig) {

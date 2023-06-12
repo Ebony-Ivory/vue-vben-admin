@@ -9,6 +9,13 @@ export const tableauHttp = createAxios({
   },
 });
 
+// WxP Demo用上传文件接口
+export const uploadServiceHttp = createAxios({
+  requestOptions: {
+    apiUrl: 'http://localhost:8080',
+  },
+});
+
 //WxP SSO服务
 export const authHttp = (() => {
   if (globSetting?.uaesDomainLogin) {
@@ -26,5 +33,3 @@ export const authHttp = (() => {
     });
   }
 })();
-
-

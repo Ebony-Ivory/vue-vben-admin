@@ -54,3 +54,16 @@ export interface UploadFileParams {
   filename?: string;
   [key: string]: any;
 }
+
+// multipart/form-data: upload files
+export interface UploadFileListParams {
+  // Other parameters
+  data?: Recordable;
+  // File parameter interface field name
+  name?: string;
+  // files list
+  files?: File[];
+  // file name
+  // filesname?: string[];
+  [key: string]: any;
+}

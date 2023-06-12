@@ -38,6 +38,15 @@ const myRoute: AppRouteModule = {
         title: 'VxeTable原生',
       },
     },
+
+    {
+      path: 'upload',
+      name: 'Upload',
+      component: () => import('/@/views/demo/upload/index.vue'),
+      meta: {
+        title: '上传文件',
+      },
+    },
   ],
 };
 
