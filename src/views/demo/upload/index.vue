@@ -1,23 +1,25 @@
 <template>
-  <Upload
-    v-model:file-list="fileList"
-    :multiple="true"
-    :before-upload="beforeUpload"
-    @remove="handleRemove"
-  >
-    <Button>
-      <upload-outlined></upload-outlined>
-      点击选择要上传的文件
-    </Button>
+  <div>
+    <Upload
+      v-model:file-list="fileList"
+      :multiple="true"
+      :before-upload="beforeUpload"
+      @remove="handleRemove"
+    >
+      <Button>
+        <upload-outlined></upload-outlined>
+        点击选择要上传的文件
+      </Button>
 
-    <template #itemRender="{ file, actions }">
-      <div class="mt-1">
-        <a href="javascript:;" @click="actions.remove"> <Tag :color="'red'">Delete</Tag></a>
-        <span>{{ file.name }}</span>
-      </div>
-    </template>
-  </Upload>
-  <Button @click="handleOk"> 提交 </Button>
+      <template #itemRender="{ file, actions }">
+        <div class="mt-1">
+          <a href="javascript:;" @click="actions.remove"> <Tag :color="'red'">Delete</Tag></a>
+          <span>{{ file.name }}</span>
+        </div>
+      </template>
+    </Upload>
+    <Button @click="handleOk"> 提交 </Button>
+  </div>
 </template>
 <script lang="ts" setup>
   import { Upload, Button, Tag } from 'ant-design-vue';
@@ -44,7 +46,6 @@
     newFileList.splice(index, 1);
     fileList.value = newFileList;
   };
-
 
   //提交文件
   async function handleOk() {

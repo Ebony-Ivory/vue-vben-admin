@@ -38,7 +38,11 @@ async function createPlugins({ isBuild, root, enableMock, compress, enableAnalyz
   vitePlugins.push(configSvgIconsPlugin({ isBuild }));
 
   // vite-plugin-purge-icons
-  vitePlugins.push(purgeIcons());
+  vitePlugins.push(purgeIcons(
+    {
+      included:["vaadin:pyramid-chart"]
+    }
+  ));
 
   // The following plugins only work in the production environment
   if (isBuild) {
