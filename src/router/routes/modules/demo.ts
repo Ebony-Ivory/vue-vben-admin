@@ -20,7 +20,7 @@ const myRoute: AppRouteModule = {
       component: () => import('/@/views/demo/pyramid/index.vue'),
       meta: {
         icon: 'vaadin:pyramid-chart',
-        title: '金字塔',
+        title: '质量金字塔',
       },
     },
     {
