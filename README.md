@@ -1,5 +1,5 @@
 <div align="center"> <br> 
-<h1>vben base2</h1>
+<h1>TEF Vben Ⅱ </h1>
 </div>
 Mail Mode:Domain Account
 
@@ -21,13 +21,17 @@ Offline Mode:TEF/123456
 - Get the project code
 
 ```bash
-git clone http://10.174.228.219/yuke.lu/vben-base2.git
+WxP
+git clone http://174.35.64.98/yuke.lu/vben-base2.git
+
+C7N
+git clone http://code.c7n.uaes.com/tf-wxp-portal/wxp-template-vue.git
 ```
 
 - Installation dependencies
 
 ```bash
-cd vben-base2
+cd {folder_name}
 
 pnpm install
 
@@ -36,7 +40,7 @@ pnpm install
 - run
 
 ```bash
-pnpm serve
+pnpm dev
 ```
 
 - build
