@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: registry.cn-hangzhou.aliyuncs.com/choerodon_tf-app-template/front-vue3
+  repository: registry.cn-hangzhou.aliyuncs.com/tf-wxp-portal/wxp-template-vue
 
 service:
-  name: front-vue3
+  name: wxp-template-vue
   enable: false
   type: ClusterIP
   port: 80
