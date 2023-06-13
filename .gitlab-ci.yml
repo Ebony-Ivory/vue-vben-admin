@@ -1,0 +1,59 @@
+image: registry.cn-shanghai.aliyuncs.com/c7n/cibase:0.11.3
+
+stages:
+  - node_build
+  - docker_build
+  - harbor
+
+node_build:
+  stage: node_build
+  script:
+    - node_module vben-base-master
+    - node_build build
+    - cp -r dist /cache/${CI_PROJECT_NAME}-${CI_PROJECT_ID}-${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHA}/dist
+
+docker_build:
+  stage: docker_build
+  script:
+    - docker_build
+    - chart_build
+
+set-label:
+  stage: harbor
+  script:
+    - syn_harbor
+  only:
+    - tags
+
+.auto_devops: &auto_devops |
+  curl -o .auto_devops.sh \
+      "${CHOERODON_URL}/devops/ci?token=${Token}&type=microservice"
+  if [ $? -ne 0 ];then
+    cat .auto_devops.sh
+    exit 1
+  fi
+  source .auto_devops.sh
+  function node_module() {
+      npm install -g pnpm@6.32.3
+      pnpm install
+      mkdir -p /cache/${CI_PROJECT_NAME}-${CI_PROJECT_ID}-${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHA}
+      ls -l /cache
+  }
+
+  function node_build() {
+      chmod -R 777 node_modules
+      pnpm ${1:-"build"}
+  }
+
+  function docker_build() {
+      cp -r /cache/${CI_PROJECT_NAME}-${CI_PROJECT_ID}-${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHA}/dist ${1:-"./docker"}/dist || true
+      kaniko -c $PWD/docker -f $PWD/docker/Dockerfile -d ${DOCKER_REGISTRY}/${GROUP_NAME}/${PROJECT_NAME}:${CI_COMMIT_TAG}  --skip-tls-verify-registry=registry.c7n.uaes.com
+      rm -rf /cache/${CI_PROJECT_NAME}-${CI_PROJECT_ID}-${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHA}
+  }
+
+  function syn_harbor() {
+      curl -u"admin:uaestfHand123" -X POST "https://${DOCKER_REGISTRY}/api/repositories/${GROUP_NAME}/${PROJECT_NAME}/tags/${CI_COMMIT_TAG}/labels" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"id\": 3, \"name\": \"prod\", \"description\": \"\", \"color\": \"#1D5100\", \"scope\": \"g\", \"project_id\": 0, \"creation_time\": \"2020-03-16T05:05:35.013055Z\", \"update_time\": \"2020-03-16T05:05:35.013055Z\", \"deleted\": false }"
+  }
+
+before_script:
+  - *auto_devops
