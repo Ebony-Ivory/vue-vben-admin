@@ -38,7 +38,7 @@ const myRoute: AppRouteModule = {
       component: () => import('/@/views/demo/vxetable/index2.vue'),
       meta: {
         icon: 'ph:table-bold',
-        title: 'VxeTable原生',
+        title: 'VxeTable(原生)',
       },
     },
 
