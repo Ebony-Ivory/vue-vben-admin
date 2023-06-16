@@ -51,6 +51,15 @@ const myRoute: AppRouteModule = {
         title: '上传文件',
       },
     },
+    {
+      path: 'download',
+      name: 'Download',
+      component: () => import('/@/views/demo/download/index.vue'),
+      meta: {
+        icon: 'mdi:download-outline',
+        title: '下载文件',
+      },
+    },
   ],
 };
 

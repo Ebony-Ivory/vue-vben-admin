@@ -16,6 +16,13 @@ export const uploadServiceHttp = createAxios({
   },
 });
 
+// WxP Demo用下载文件接口
+export const downloadServiceHttp = createAxios({
+  requestOptions: {
+    apiUrl: 'http://localhost:8080',
+  },
+});
+
 //WxP SSO服务
 export const authHttp = (() => {
   if (globSetting?.uaesDomainLogin) {
