@@ -64,11 +64,12 @@ export default {
     'named-grid-areas-no-invalid': null,
     'no-descending-specificity': null,
     'font-family-no-missing-generic-family-keyword': null,
+    'rule-empty-line-before': null,
     // 'rule-empty-line-before': [
-      // 'never',
-      // {
-      //   ignore: ['after-comment', 'first-nested'],
-      // },
+    // 'never',
+    // {
+    //   ignore: ['after-comment', 'first-nested'],
+    // },
     // ],
     'unit-no-unknown': [true, { ignoreUnits: ['rpx'] }],
     'order/order': [

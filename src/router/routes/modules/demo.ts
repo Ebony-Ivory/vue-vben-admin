@@ -60,6 +60,15 @@ const myRoute: AppRouteModule = {
         title: '下载文件',
       },
     },
+    {
+      path: 'multitab',
+      name: 'Multitab',
+      component: () => import('/@/views/demo/multitab/index.vue'),
+      meta: {
+        icon: 'typcn:tabs-outline',
+        title: '多标签',
+      },
+    },
   ],
 };
 

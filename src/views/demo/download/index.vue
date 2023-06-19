@@ -29,6 +29,7 @@
   //方式2
   const donwloadFun2 = () => {
     downloadApi().then((res) => {
+      
       let { headers, data } = res;
       //WxP默认解析方式,有需求的话自行实现
       let cdStr = decodeURIComponent(headers['content-disposition']);
