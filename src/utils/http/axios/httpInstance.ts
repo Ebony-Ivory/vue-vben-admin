@@ -28,7 +28,7 @@ export const authHttp = (() => {
   if (globSetting?.uaesDomainLogin) {
     return createAxios({
       requestOptions: {
-        apiUrl: 'http://174.35.64.19:8080/sso-spring-back',
+        apiUrl: 'http://sso-be.wxp.dev.dservice.uaes.com',
       },
     });
   } else {
