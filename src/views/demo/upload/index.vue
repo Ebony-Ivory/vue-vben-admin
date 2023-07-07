@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <Card title="仅文件">
     <Upload
-      v-model:file-list="fileList"
+      v-model:file-list="selectedFileList"
       :multiple="true"
       :before-upload="beforeUpload"
       @remove="handleRemove"
@@ -18,33 +18,34 @@
         </div>
       </template>
     </Upload>
-    <Button @click="handleOk"> 提交 </Button>
-  </div>
+    <Button class="mt-1" @click="handleOk"> 提交 </Button>
+  </Card>
 </template>
 <script lang="ts" setup>
   import { Upload, Button, Tag } from 'ant-design-vue';
   import { UploadOutlined } from '@ant-design/icons-vue';
   import type { UploadProps } from 'ant-design-vue';
+  import { Card } from 'ant-design-vue';
   import { uploadFileList } from '/@/api/demo/upload';
   import { ref } from 'vue';
   import type { UploadFileListParams } from '/#/axios';
-  const fileList = ref<UploadProps['fileList']>([]);
+  const selectedFileList = ref<UploadProps['fileList']>([]);
 
-  //选择自行上传
+  //选择绑定selectedFileList之前自行处理
   const beforeUpload: UploadProps['beforeUpload'] = (file) => {
+    //不含当前选择文件的文件列表(原始类型)
     //@ts-ignore
-    fileList.value = [...fileList.value, file];
+    let temp: File[] = [...(selectedFileList.value?.map((x) => x.originFileObj) as File[])];
     return false;
   };
 
   //删除文件
   const handleRemove: UploadProps['onRemove'] = (file) => {
     //@ts-ignore
-    const index = fileList.value.indexOf(file);
+    const index = selectedFileList.value.indexOf(file);
     //@ts-ignore
-    const newFileList = fileList.value.slice();
-    newFileList.splice(index, 1);
-    fileList.value = newFileList;
+    //删除文件
+    selectedFileList.value?.splice(index, 1);
   };
 
   //提交文件
@@ -53,7 +54,8 @@
     let uploadParam: UploadFileListParams = { files: [] };
     //自定义的额外信息
     uploadParam.data = {};
-    uploadParam.files = fileList.value?.map((x) => x.originFileObj) as File[];
+    //类型转换
+    uploadParam.files = selectedFileList.value?.map((x) => x.originFileObj) as File[];
     uploadParam.name = 'fileListField';
 
     //@ts-ignore

@@ -43,12 +43,21 @@ const myRoute: AppRouteModule = {
     },
 
     {
-      path: 'upload',
-      name: 'Upload',
+      path: 'upload1',
+      name: 'Upload1',
       component: () => import('/@/views/demo/upload/index.vue'),
       meta: {
         icon: 'mdi:upload-outline',
-        title: '上传文件',
+        title: '上传文件1',
+      },
+    },
+    {
+      path: 'upload2',
+      name: 'Upload2',
+      component: () => import('/@/views/demo/upload/index2.vue'),
+      meta: {
+        icon: 'mdi:upload-outline',
+        title: '上传文件2',
       },
     },
     {

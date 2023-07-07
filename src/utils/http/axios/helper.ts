@@ -1,5 +1,5 @@
 import { isObject, isString } from '/@/utils/is';
-
+import type { UploadFileListParams } from '/#/axios';
 const DATE_TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss';
 
 export function joinTimestamp<T extends boolean>(
@@ -45,4 +45,30 @@ export function formatRequestDate(params: Recordable) {
       formatRequestDate(params[key]);
     }
   }
+}
+
+/**
+ * @author: yuke.lu
+ * @description: Format obj into upload file list model
+ * @param {Recordable} data
+ */
+export function toUploadFileListParams(data: Recordable): UploadFileListParams {
+  let res: UploadFileListParams = {
+    data: {},
+    name: 'defaultFileListFieldName',
+    files: [],
+  };
+  if (data) {
+    Object.keys(data).forEach((key) => {
+      const value = data![key];
+      // console.log(key, typeof value, value?.toString());
+      if (value?.toString().includes('[object File]')) {
+        res.files = value;
+        res.name = key;
+      } else {
+        Object.assign(res.data!, { [key]: value });
+      }
+    });
+  }
+  return res;
 }
