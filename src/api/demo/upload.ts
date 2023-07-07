@@ -5,7 +5,7 @@ import { toUploadFileListParams } from '/@/utils/http/axios/helper';
 
 enum Api {
   UploadFiles = '/file/uploadList',
-  submitFileAndData = '/file/submitFileAndData',
+  SubmitFileAndData = '/file/submitFileAndData',
 }
 
 //仅文件上传,不需要额外包装
@@ -24,7 +24,7 @@ export const uploadFileList = (params: UploadFileListParams) =>
 export const submitFileAndData = (data: MixSubmitModel) =>
   uploadServiceHttp.uploadFileList<string>(
     {
-      url: Api.UploadFiles,
+      url: Api.SubmitFileAndData,
       //默认POST,有特殊情况在这里指定
       method: 'PUT',
     },
