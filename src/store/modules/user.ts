@@ -16,6 +16,7 @@ import { RouteRecordRaw } from 'vue-router';
 import { PAGE_NOT_FOUND_ROUTE } from '/@/router/routes/basic';
 import { isArray } from '/@/utils/is';
 import { h } from 'vue';
+import { PayloadModel } from '/@/router/helper/uaesSsoPageHepler';
 
 interface UserState {
   userInfo: Nullable<UserInfo>;
@@ -100,6 +101,21 @@ export const useUserStore = defineStore({
         return Promise.reject(error);
       }
     },
+    /**
+     * @description: dservice登录后的处理
+     */
+    async afterDserviceSsoPageLogin(payload: PayloadModel): Promise<GetUserInfoModel | null> {
+      try {
+        const { AccessToken: token } = payload;
+
+        // save token
+        this.setToken(token);
+        return this.afterLoginAction(false);
+      } catch (error) {
+        return Promise.reject(error);
+      }
+    },
+
     async afterLoginAction(goHome?: boolean): Promise<GetUserInfoModel | null> {
       if (!this.getToken) return null;
       // get user info

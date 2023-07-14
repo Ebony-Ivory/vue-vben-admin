@@ -149,7 +149,12 @@ export interface GlobConfig {
   shortName: string;
   //是否启用联电的域账户登录
   uaesDomainLogin: boolean;
-
+  //是否启用联电的单点登录页面
+  uaesSsoPage: boolean;
+  //dservice app id
+  uaesDserviceAppId: string;
+  //dservice app key
+  uaesDserviceAppKey: string;
 }
 export interface GlobEnvConfig {
   // Site title
@@ -162,5 +167,10 @@ export interface GlobEnvConfig {
   VITE_GLOB_UPLOAD_URL?: string;
   //是否启用联电的域账户登录
   VITE_GLOB_UAES_DOMAIN_LOGIN: string;
-
+  //是否启用联电的单点登录页面
+  VITE_GLOB_UAES_SSO_PAGE: string;
+  //dservice app id
+  VITE_GLOB_UAES_DSERVICE_APP_ID: string;
+  //dservice app key
+  VITE_GLOB_UAES_DSERVICE_APP_KEY: string;
 }

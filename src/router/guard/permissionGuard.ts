@@ -9,6 +9,13 @@ import { PAGE_NOT_FOUND_ROUTE } from '/@/router/routes/basic';
 
 import { RootRoute } from '/@/router/routes';
 
+import {
+  useSsoLoginPage,
+  toUaesDserviceLoginPage,
+  containPayloadKey,
+  setDserviceToken,
+} from '/@/router/helper/uaesSsoPageHepler';
+
 const LOGIN_PATH = PageEnum.BASE_LOGIN;
 
 const ROOT_PATH = RootRoute.path;
@@ -45,6 +52,17 @@ export function createPermissionGuard(router: Router) {
           //
         }
       }
+      //SSO Page
+      else if (to.path === LOGIN_PATH && !token) {
+        //根据配置判断用哪种登录方式
+        if (useSsoLoginPage && !containPayloadKey(to)) {
+          toUaesDserviceLoginPage(to);
+        }
+        if (useSsoLoginPage && containPayloadKey(to)) {
+          setDserviceToken(to);
+        }
+      }
+
       next();
       return;
     }
