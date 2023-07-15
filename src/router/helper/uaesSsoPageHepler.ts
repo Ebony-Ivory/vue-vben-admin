@@ -1,10 +1,9 @@
 import { useGlobSetting } from '/@/hooks/setting';
-import { openWindow } from '/@/utils';
 import { buildUUID } from '/@/utils/uuid';
 import { dateUtil } from '/@/utils/dateUtil';
 import { encryptByMd5, encryptByBase64, decodeByBase64 } from '/@/utils/cipher';
 import type { RouteLocationNormalized } from 'vue-router';
-import { useUserStore } from '/@/store/modules/user';
+import { useUserStoreWithOut } from '/@/store/modules/user';
 /*
 1)	准备的8个参数及示范内容：
 string RequestID="01e60a6b78e549e39d8c1b2d10e2dafa";
@@ -49,14 +48,17 @@ const globSetting = useGlobSetting();
 const payLoadField = 'dserviceAuthorizePayloadField';
 const dserviceOauth2Url = 'http://oauth2.prod.aliyun.dservice.uaes.com/connect/oauth2';
 const appId = globSetting.uaesDserviceAppId || '';
-const appKey = globSetting.uaesDserviceAppKey||'';
-const userStore = useUserStore();
+const appKey = globSetting.uaesDserviceAppKey || '';
+const userStore = useUserStoreWithOut();
 //全局参数
 export const useSsoLoginPage = globSetting.uaesSsoPage;
 
 export function toUaesDserviceLoginPage(to: RouteLocationNormalized) {
   console.log('🚀 🔶 doUaesDserviceSso 🔶 to=>', to);
-  openWindow(getFullDServiceLoginUrll(), { target: '__self' });
+  console.log("🚀 🔶 toUaesDserviceLoginPage 🔶 getFullDServiceLoginUrll=>", getFullDServiceLoginUrl())
+  // window.location.href='http://code.c7n.uaes.com/';
+  window.location.href = getFullDServiceLoginUrl();
+
 }
 
 export function setDserviceToken(to: RouteLocationNormalized) {
@@ -91,7 +93,7 @@ export function decodePayload(rawStr: string): PayloadModel {
 }
 
 //按照dservice文档拼接登录地址和参数
-function getFullDServiceLoginUrll(): string {
+function getFullDServiceLoginUrl(): string {
   return `${dserviceOauth2Url}/authorize?data=${genBase64ParamStr()}`;
 }
 

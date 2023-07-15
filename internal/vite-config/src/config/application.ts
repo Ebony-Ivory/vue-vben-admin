@@ -7,6 +7,7 @@ import { defineConfig, loadEnv, mergeConfig, type UserConfig } from 'vite';
 import { createPlugins } from '../plugins';
 import { generateModifyVars } from '../utils/modifyVars';
 import { commonConfig } from './common';
+import { getUaesCommonConfig } from './uaesCommon';
 
 interface DefineOptions {
   overrides?: UserConfig;
@@ -91,7 +92,10 @@ function defineApplicationConfig(defineOptions: DefineOptions = {}) {
       plugins,
     };
 
-    const mergedConfig = mergeConfig(commonConfig, applicationConfig);
+    //origin
+    // const mergedConfig = mergeConfig(commonConfig, applicationConfig);
+    //uaes
+    const mergedConfig = mergeConfig(getUaesCommonConfig(isBuild), applicationConfig);
 
     return mergeConfig(mergedConfig, overrides);
   });
