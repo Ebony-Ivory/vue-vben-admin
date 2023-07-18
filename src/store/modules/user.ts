@@ -101,8 +101,11 @@ export const useUserStore = defineStore({
         return Promise.reject(error);
       }
     },
+
+    //#region dservice页面跳转登录成功后的处理
+
     /**
-     * @description: dservice登录后的处理
+     * @description: dservice页面跳转登录成功后的处理(token)
      */
     async afterDserviceSsoPageLogin(payload: PayloadModel): Promise<GetUserInfoModel | null> {
       try {
@@ -110,11 +113,22 @@ export const useUserStore = defineStore({
 
         // save token
         this.setToken(token);
-        return this.afterLoginAction(false);
+        //TBD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        return this.afterDserviceSsoPageLoginAction(false);
       } catch (error) {
         return Promise.reject(error);
       }
     },
+    /**
+     * @description: dservice页面跳转登录成功后的处理(用户信息和路由)
+     */
+    async afterDserviceSsoPageLoginAction(goHome?: boolean): Promise<GetUserInfoModel | null> {
+      //参考afterLoginAction进行重写
+      const userInfo = await getUserInfo();
+      return userInfo;
+    },
+
+    //#endregion
 
     async afterLoginAction(goHome?: boolean): Promise<GetUserInfoModel | null> {
       if (!this.getToken) return null;

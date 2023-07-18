@@ -4,6 +4,9 @@ import { dateUtil } from '/@/utils/dateUtil';
 import { encryptByMd5, encryptByBase64, decodeByBase64 } from '/@/utils/cipher';
 import type { RouteLocationNormalized } from 'vue-router';
 import { useUserStoreWithOut } from '/@/store/modules/user';
+import { PageEnum } from '/@/enums/pageEnum';
+
+const LOGIN_PATH = PageEnum.BASE_LOGIN;
 /*
 1)	准备的8个参数及示范内容：
 string RequestID="01e60a6b78e549e39d8c1b2d10e2dafa";
@@ -54,24 +57,37 @@ const userStore = useUserStoreWithOut();
 export const useSsoLoginPage = globSetting.uaesSsoPage;
 
 export function toUaesDserviceLoginPage(to: RouteLocationNormalized) {
-  console.log('🚀 🔶 doUaesDserviceSso 🔶 to=>', to);
-  console.log("🚀 🔶 toUaesDserviceLoginPage 🔶 getFullDServiceLoginUrll=>", getFullDServiceLoginUrl())
-  // window.location.href='http://code.c7n.uaes.com/';
   window.location.href = getFullDServiceLoginUrl();
-
 }
 
-export function setDserviceToken(to: RouteLocationNormalized) {
-  let rawStr = to.query?.[payLoadField] as string;
+export function setDserviceToken(rawStr:string) {
   let payload = decodePayload(rawStr);
   userStore.afterDserviceSsoPageLogin(payload);
 }
 
-export function containPayloadKey(to: RouteLocationNormalized): boolean {
+
+//暂定,需要等供应商升级后确定
+export function getPayloadRawStr(to: RouteLocationNormalized, searchStr: string): string | null {
+  let searchParams = new URLSearchParams(searchStr);
   if (to.query?.[payLoadField]) {
-    return true;
+    return to.query?.[payLoadField] as string;
   }
-  return false;
+  return payloadRawStrInSearchParams(searchParams);
+}
+
+//暂定,需要等供应商升级后确定
+function payloadRawStrInSearchParams(searchParams: URLSearchParams): string | null {
+  try {
+    for (let p of searchParams.entries()) {
+      if (p[0].toString() == payLoadField) {
+        return p[1];
+      }
+    }
+    return null;
+  } catch (e) {
+    console.error('payloadRawStrInSearchParams error', e);
+    return null;
+  }
 }
 
 export function decodePayload(rawStr: string): PayloadModel {
@@ -100,10 +116,11 @@ function getFullDServiceLoginUrl(): string {
 function genBase64ParamStr(): string {
   let requestId = buildUUID();
 
+  // debugger;
   let timeStamp = dateUtil().valueOf();
-  let redirect = window.location.origin;
+  let redirect = `${window.location.origin}/#/login`;
   let parameterName = payLoadField;
-  let customValue = '';
+  let customValue = 'xxxlyklykxxx';
 
   let queryObj: SsoQueryObjectModel = {
     RequestID: requestId,
@@ -119,6 +136,7 @@ function genBase64ParamStr(): string {
 
   //json化
   let queryParamJson = JSON.stringify(queryObj);
+  console.log('🚀 🔶 genBase64ParamStr 🔶 queryObj.Redirect=>', queryObj);
   return encryptByBase64(queryParamJson);
 }
 

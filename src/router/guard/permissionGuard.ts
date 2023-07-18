@@ -12,7 +12,7 @@ import { RootRoute } from '/@/router/routes';
 import {
   useSsoLoginPage,
   toUaesDserviceLoginPage,
-  containPayloadKey,
+  getPayloadRawStr,
   setDserviceToken,
 } from '/@/router/helper/uaesSsoPageHepler';
 
@@ -25,6 +25,7 @@ const whitePathList: PageEnum[] = [LOGIN_PATH];
 export function createPermissionGuard(router: Router) {
   const userStore = useUserStoreWithOut();
   const permissionStore = usePermissionStoreWithOut();
+  // debugger;
   router.beforeEach(async (to, from, next) => {
     if (
       from.path === ROOT_PATH &&
@@ -37,29 +38,33 @@ export function createPermissionGuard(router: Router) {
     }
 
     const token = userStore.getToken;
-    debugger;
+    // debugger;
     // Whitelist can be directly entered
     if (whitePathList.includes(to.path as PageEnum)) {
-      if (to.path === LOGIN_PATH && token) {
-        const isSessionTimeout = userStore.getSessionTimeout;
-        try {
-          await userStore.afterLoginAction();
-          if (!isSessionTimeout) {
-            next((to.query?.redirect as string) || '/');
-            return;
+      console.log('🚀 🔶 router.beforeEach 🔶 location=>', window.location);
+      //根据配置判断用哪种登录方式
+      if (useSsoLoginPage) {
+        if (to.path === LOGIN_PATH && !token) {
+          if (!getPayloadRawStr(to, window.location.search)) {
+            toUaesDserviceLoginPage(to);
           }
-        } catch {
-          //
+          if (getPayloadRawStr(to, window.location.search)) {
+            setDserviceToken(getPayloadRawStr(to, window.location.search)!);
+          }
         }
-      }
-      //SSO Page
-      else if (to.path === LOGIN_PATH && !token) {
-        //根据配置判断用哪种登录方式
-        if (useSsoLoginPage && !containPayloadKey(to)) {
-          toUaesDserviceLoginPage(to);
-        }
-        if (useSsoLoginPage && containPayloadKey(to)) {
-          setDserviceToken(to);
+      } else {
+        //origin
+        if (to.path === LOGIN_PATH && token) {
+          const isSessionTimeout = userStore.getSessionTimeout;
+          try {
+            await userStore.afterLoginAction();
+            if (!isSessionTimeout) {
+              next((to.query?.redirect as string) || '/');
+              return;
+            }
+          } catch {
+            //
+          }
         }
       }
 
