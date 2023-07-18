@@ -3,7 +3,9 @@ import { authHttp } from '/@/utils/http/axios/httpInstance';
 import { LoginParams, LoginResultModel, GetUserInfoModel } from './model/userModel';
 
 import { ErrorMessageMode } from '/#/axios';
+import { useGlobSetting } from '/@/hooks/setting';
 
+const { uaesDserviceAppId = '' } = useGlobSetting();
 enum Api {
   Login = '/login',
   Logout = '/logout',
@@ -31,7 +33,10 @@ export function loginApi(params: LoginParams, mode: ErrorMessageMode = 'modal') 
  * @description: getUserInfo
  */
 export function getUserInfo() {
-  return authHttp.get<GetUserInfoModel>({ url: Api.GetUserInfo }, { errorMessageMode: 'none' });
+  return authHttp.get<GetUserInfoModel>(
+    { url: Api.GetUserInfo, params: { appId: uaesDserviceAppId } },
+    { errorMessageMode: 'none' },
+  );
 }
 
 export function getPermCode() {

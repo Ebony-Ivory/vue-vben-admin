@@ -78,6 +78,18 @@ const myRoute: AppRouteModule = {
         title: '多标签',
       },
     },
+
+    {
+      path: 'authPage',
+      name: 'AuthPage',
+      component: () => import('/@/views/demo/authPage/index.vue'),
+      meta: {
+        icon: 'ic:outline-lock',
+        title: '鉴权页面',
+        //任意一个匹配即可
+        roles: ['defaultValue','xxxxxxxxxxx'],
+      },
+    },
   ],
 };
 
