@@ -18,7 +18,11 @@
         </div>
       </template>
     </Upload>
-    <Button class="mt-1" @click="handleOk"> 提交 </Button>
+    <Button class="m-1" @click="handleOk"> 提交 </Button>
+
+    <Authority :value="['wxp-template-vue.demo.upload1.btn.updateSth', 'defaultValue']">
+      <Button class="m-1" type="primary"> 上传页面的鉴权按钮 </Button>
+    </Authority>
   </Card>
 </template>
 <script lang="ts" setup>
@@ -28,6 +32,7 @@
   import { Card } from 'ant-design-vue';
   import { uploadFileList } from '/@/api/demo/upload';
   import { ref } from 'vue';
+  import { Authority } from '/@/components/Authority';
   import type { UploadFileListParams } from '/#/axios';
   const selectedFileList = ref<UploadProps['fileList']>([]);
 

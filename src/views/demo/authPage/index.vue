@@ -6,11 +6,11 @@
       <Button class="m-1" type="primary"> 鉴权按钮1 </Button>
     </Authority>
 
-    <Authority :value="['xxxxxxxxxxxxx']">
+    <Authority :value="['xxxxxxxxxxxxxxxxxxxx']">
       <Button class="m-1" type="primary"> 鉴权按钮2 </Button>
     </Authority>
 
-    <Authority :value="['xxxxxxxxxxxxx', 'defaultValue']">
+    <Authority :value="['wxp-template-vue.demo.authPage.btn.addSth', 'defaultValue']">
       <Button class="m-1" type="primary"> 鉴权按钮3 </Button>
     </Authority>
   </div>

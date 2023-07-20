@@ -49,6 +49,7 @@ const myRoute: AppRouteModule = {
       meta: {
         icon: 'mdi:upload-outline',
         title: '上传文件1',
+        roles: ['wxp-template-vue.demo.upload1.page.view', 'defaultValue'],
       },
     },
     {
@@ -87,7 +88,7 @@ const myRoute: AppRouteModule = {
         icon: 'ic:outline-lock',
         title: '鉴权页面',
         //任意一个匹配即可
-        roles: ['defaultValue','xxxxxxxxxxx'],
+        roles: ['wxp-template-vue.demo.authPage.page.view', 'xxxxxxxxxxx'],
       },
     },
   ],
