@@ -51,7 +51,7 @@ const globSetting = useGlobSetting();
 const payLoadField = 'dserviceAuthorizePayloadField';
 const dserviceOauth2Url = 'http://oauth2.prod.aliyun.dservice.uaes.com/connect/oauth2';
 const appId = globSetting.uaesDserviceAppId || '';
-const appKey = globSetting.uaesDserviceAppKey || '';
+
 const userStore = useUserStoreWithOut();
 //全局参数
 export const useSsoLoginPage = globSetting.uaesSsoPage;
@@ -60,11 +60,10 @@ export function toUaesDserviceLoginPage(to: RouteLocationNormalized) {
   window.location.href = getFullDServiceLoginUrl();
 }
 
-export function setDserviceToken(rawStr:string) {
+export function setDserviceToken(rawStr: string) {
   let payload = decodePayload(rawStr);
   userStore.afterDserviceSsoPageLogin(payload);
 }
-
 
 //暂定,需要等供应商升级后确定
 export function getPayloadRawStr(to: RouteLocationNormalized, searchStr: string): string | null {
@@ -122,6 +121,10 @@ function genBase64ParamStr(): string {
   let parameterName = payLoadField;
   let customValue = 'xxxlyklykxxx';
 
+  //根据申请的域名判断是用dservice的哪个key
+  debugger;
+  let isProd = window.location.origin.includes('.prod.aliyun.dservice.uaes.com');
+  const appKey = isProd ? globSetting.uaesDserviceAppProdKey : globSetting.uaesDserviceAppDevKey;
   let queryObj: SsoQueryObjectModel = {
     RequestID: requestId,
     AppID: appId,
