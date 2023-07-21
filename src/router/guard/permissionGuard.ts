@@ -42,7 +42,7 @@ export function createPermissionGuard(router: Router) {
     debugger;
     // Whitelist can be directly entered
     if (whitePathList.includes(to.path as PageEnum)) {
-      console.log('🚀 🔶 router.beforeEach 🔶 location=>', window.location);
+      console.log('🚀 🔶 router.beforeEach 🔶 location=>',JSON.stringify(window.location) );
       //根据配置判断用哪种登录方式
       if (useSsoLoginPage) {
         if (to.path === LOGIN_PATH && !token) {

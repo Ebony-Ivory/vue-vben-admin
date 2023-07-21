@@ -58,8 +58,7 @@ const appKey = globSetting.uaesDserviceAppProdKey;
 export const useSsoLoginPage = globSetting.uaesSsoPage;
 //按照dservice文档拼接登录地址和参数
 export function toUaesDserviceLoginPage(to: RouteLocationNormalized) {
-  debugger;
-  console.log("🚀 🟩 toUaesDserviceLoginPage 🟩 to=>", to.toString())
+  console.log('🚀 🟩 toUaesDserviceLoginPage 🟩 to=>', JSON.stringify(to));
   window.location.href = `${dserviceOauth2Url}/authorize?data=${genBase64ParamStr()}`;
 }
 
@@ -111,11 +110,13 @@ export function decodePayload(rawStr: string): PayloadModel {
 
 export function clearSsoHref() {
   let searchStr = window.location.search;
-  console.log("🚀 🟩 clearSsoHref 🟩 searchStr=>", searchStr.toString())
-  window.location.href = window.location.href.replace(`${searchStr}`, '');
+
+  console.log("🚀 🟩 clearSsoHref 🟩 location=>", window.location)
+  let clearedHref = window.location.href.replace(`${searchStr}`, '');
+  
+  console.log('🚀 🟩 clearSsoHref 🟩 clearedHref=>', clearedHref);
+  window.location.href = clearedHref;
 }
-
-
 
 function genBase64ParamStr(): string {
   let requestId = buildUUID();
@@ -140,7 +141,7 @@ function genBase64ParamStr(): string {
 
   //json化
   let queryParamJson = JSON.stringify(queryObj);
-  console.log('🚀 🟩 genBase64ParamStr 🟩 queryObj=>', queryObj.toString());
+  console.log('🚀 🟩 genBase64ParamStr 🟩 queryObj=>', JSON.stringify(queryObj));
   return encryptByBase64(queryParamJson);
 }
 

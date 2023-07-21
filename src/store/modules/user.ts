@@ -143,7 +143,10 @@ export const useUserStore = defineStore({
     /**
      * @description: dservice页面跳转登录成功后的处理(用户信息和路由)
      */
-    async afterSsoPageLoginAction(payload: PayloadModel): Promise<GetUserInfoModel | null> {
+    async afterSsoPageLoginAction(
+      payload: PayloadModel,
+      goHome = false,
+    ): Promise<GetUserInfoModel | null> {
       try {
         const { AccessToken: token } = payload;
         // save token
@@ -165,8 +168,8 @@ export const useUserStore = defineStore({
             router.addRoute(PAGE_NOT_FOUND_ROUTE as unknown as RouteRecordRaw);
             permissionStore.setDynamicAddedRoute(true);
           }
-          
-          await router.replace(userInfo?.homePath || PageEnum.BASE_HOME);
+
+          goHome && (await router.replace(userInfo?.homePath || PageEnum.BASE_HOME));
         }
         return userInfo;
       } catch (error) {
@@ -184,7 +187,6 @@ export const useUserStore = defineStore({
         userInfo.roles = [];
         this.setRoleList([]);
       }
-      debugger;
       this.setUserInfo(userInfo);
       return userInfo;
     },
