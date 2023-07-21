@@ -59,7 +59,7 @@ export const useSsoLoginPage = globSetting.uaesSsoPage;
 //按照dservice文档拼接登录地址和参数
 export function toUaesDserviceLoginPage(to: RouteLocationNormalized) {
   debugger;
-  console.log("🚀 🟩 toUaesDserviceLoginPage 🟩 to=>", to)
+  console.log("🚀 🟩 toUaesDserviceLoginPage 🟩 to=>", to.toString())
   window.location.href = `${dserviceOauth2Url}/authorize?data=${genBase64ParamStr()}`;
 }
 
@@ -111,6 +111,7 @@ export function decodePayload(rawStr: string): PayloadModel {
 
 export function clearSsoHref() {
   let searchStr = window.location.search;
+  console.log("🚀 🟩 clearSsoHref 🟩 searchStr=>", searchStr.toString())
   window.location.href = window.location.href.replace(`${searchStr}`, '');
 }
 
@@ -139,7 +140,7 @@ function genBase64ParamStr(): string {
 
   //json化
   let queryParamJson = JSON.stringify(queryObj);
-  console.log('🚀 🟩 genBase64ParamStr 🟩 queryObj=>', queryObj);
+  console.log('🚀 🟩 genBase64ParamStr 🟩 queryObj=>', queryObj.toString());
   return encryptByBase64(queryParamJson);
 }
 
