@@ -13,7 +13,8 @@ import {
   useSsoLoginPage,
   toUaesDserviceLoginPage,
   getPayloadRawStr,
-  setDserviceToken,
+  getPayload,
+  clearSsoHref,
 } from '/@/router/helper/uaesSsoPageHepler';
 
 const LOGIN_PATH = PageEnum.BASE_LOGIN;
@@ -25,7 +26,7 @@ const whitePathList: PageEnum[] = [LOGIN_PATH];
 export function createPermissionGuard(router: Router) {
   const userStore = useUserStoreWithOut();
   const permissionStore = usePermissionStoreWithOut();
-  // debugger;
+
   router.beforeEach(async (to, from, next) => {
     if (
       from.path === ROOT_PATH &&
@@ -38,7 +39,7 @@ export function createPermissionGuard(router: Router) {
     }
 
     const token = userStore.getToken;
-    // debugger;
+    debugger;
     // Whitelist can be directly entered
     if (whitePathList.includes(to.path as PageEnum)) {
       console.log('🚀 🔶 router.beforeEach 🔶 location=>', window.location);
@@ -49,7 +50,19 @@ export function createPermissionGuard(router: Router) {
             toUaesDserviceLoginPage(to);
           }
           if (getPayloadRawStr(to, window.location.search)) {
-            setDserviceToken(getPayloadRawStr(to, window.location.search)!);
+            let payload = getPayload(getPayloadRawStr(to, window.location.search)!);
+            const isSessionTimeout = userStore.getSessionTimeout;
+            try {
+              await userStore.afterSsoPageLoginAction(payload);
+              //清理href
+              clearSsoHref();
+              if (!isSessionTimeout) {
+                next((to.query?.redirect as string) || '/');
+                return;
+              }
+            } catch {
+              //
+            }
           }
         }
       } else {
@@ -107,7 +120,11 @@ export function createPermissionGuard(router: Router) {
     // get userinfo while last fetch time is empty
     if (userStore.getLastUpdateTime === 0) {
       try {
-        await userStore.getUserInfoAction();
+        if (useSsoLoginPage) {
+          await userStore.getSsoPageUserInfoAction();
+        } else {
+          await userStore.getUserInfoAction();
+        }
       } catch (err) {
         next();
         return;

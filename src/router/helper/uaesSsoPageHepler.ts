@@ -3,10 +3,9 @@ import { buildUUID } from '/@/utils/uuid';
 import { dateUtil } from '/@/utils/dateUtil';
 import { encryptByMd5, encryptByBase64, decodeByBase64 } from '/@/utils/cipher';
 import type { RouteLocationNormalized } from 'vue-router';
-import { useUserStoreWithOut } from '/@/store/modules/user';
-import { PageEnum } from '/@/enums/pageEnum';
+// import { useUserStoreWithOut } from '/@/store/modules/user';
+// import { PageEnum } from '/@/enums/pageEnum';
 
-const LOGIN_PATH = PageEnum.BASE_LOGIN;
 /*
 1)	准备的8个参数及示范内容：
 string RequestID="01e60a6b78e549e39d8c1b2d10e2dafa";
@@ -50,19 +49,22 @@ eyJSZXF1ZXN0SUQiOiIyMGU3ZGQwN2I1Y2E0ZmIyYjM2ODQzZTA2ODBhNGQxNyIsIkFwcElEIjoiZC1m
 const globSetting = useGlobSetting();
 const payLoadField = 'dserviceAuthorizePayloadField';
 const dserviceOauth2Url = 'http://oauth2.prod.aliyun.dservice.uaes.com/connect/oauth2';
+// const dserviceOauth2Url = 'http://oauth2.dev.dservice.uaes.com/connect/oauth2';
 const appId = globSetting.uaesDserviceAppId || '';
-
-const userStore = useUserStoreWithOut();
+// const LOGIN_PATH = PageEnum.BASE_LOGIN;
+const appKey = globSetting.uaesDserviceAppProdKey;
+// const userStore = useUserStoreWithOut();
 //全局参数
 export const useSsoLoginPage = globSetting.uaesSsoPage;
-
+//按照dservice文档拼接登录地址和参数
 export function toUaesDserviceLoginPage(to: RouteLocationNormalized) {
-  window.location.href = getFullDServiceLoginUrl();
+  debugger;
+  console.log("🚀 🟩 toUaesDserviceLoginPage 🟩 to=>", to)
+  window.location.href = `${dserviceOauth2Url}/authorize?data=${genBase64ParamStr()}`;
 }
 
-export function setDserviceToken(rawStr: string) {
-  let payload = decodePayload(rawStr);
-  userStore.afterDserviceSsoPageLogin(payload);
+export function getPayload(rawStr: string) {
+  return decodePayload(rawStr);
 }
 
 //暂定,需要等供应商升级后确定
@@ -107,24 +109,22 @@ export function decodePayload(rawStr: string): PayloadModel {
   }
 }
 
-//按照dservice文档拼接登录地址和参数
-function getFullDServiceLoginUrl(): string {
-  return `${dserviceOauth2Url}/authorize?data=${genBase64ParamStr()}`;
+export function clearSsoHref() {
+  let searchStr = window.location.search;
+  window.location.href = window.location.href.replace(`${searchStr}`, '');
 }
+
+
 
 function genBase64ParamStr(): string {
   let requestId = buildUUID();
 
-  // debugger;
   let timeStamp = dateUtil().valueOf();
-  let redirect = `${window.location.origin}/#/login`;
+  // let redirect = `${window.location.origin}/#/login`;
+  let redirect = `${window.location.href}`;
   let parameterName = payLoadField;
-  let customValue = 'xxxlyklykxxx';
+  let customValue = 'poweredbywxptef4dot0group';
 
-  //根据申请的域名判断是用dservice的哪个key
-  debugger;
-  let isProd = window.location.origin.includes('.prod.aliyun.dservice.uaes.com');
-  const appKey = isProd ? globSetting.uaesDserviceAppProdKey : globSetting.uaesDserviceAppDevKey;
   let queryObj: SsoQueryObjectModel = {
     RequestID: requestId,
     AppID: appId,
@@ -139,7 +139,7 @@ function genBase64ParamStr(): string {
 
   //json化
   let queryParamJson = JSON.stringify(queryObj);
-  console.log('🚀 🔶 genBase64ParamStr 🔶 queryObj.Redirect=>', queryObj);
+  console.log('🚀 🟩 genBase64ParamStr 🟩 queryObj=>', queryObj);
   return encryptByBase64(queryParamJson);
 }
 

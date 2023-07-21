@@ -7,7 +7,7 @@ import { PageEnum } from '/@/enums/pageEnum';
 import { ROLES_KEY, TOKEN_KEY, USER_INFO_KEY } from '/@/enums/cacheEnum';
 import { getAuthCache, setAuthCache } from '/@/utils/auth';
 import { GetUserInfoModel, LoginParams } from '/@/api/sys/model/userModel';
-import { doLogout, getUserInfo, loginApi } from '/@/api/sys/user';
+import { doLogout, getUserInfo, loginApi, getSsOPageUserInfo } from '/@/api/sys/user';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { useMessage } from '/@/hooks/web/useMessage';
 import { router } from '/@/router';
@@ -17,7 +17,6 @@ import { PAGE_NOT_FOUND_ROUTE } from '/@/router/routes/basic';
 import { isArray } from '/@/utils/is';
 import { h } from 'vue';
 import { PayloadModel } from '/@/router/helper/uaesSsoPageHepler';
-
 interface UserState {
   userInfo: Nullable<UserInfo>;
   token?: string;
@@ -102,34 +101,6 @@ export const useUserStore = defineStore({
       }
     },
 
-    //#region dservice页面跳转登录成功后的处理
-
-    /**
-     * @description: dservice页面跳转登录成功后的处理(token)
-     */
-    async afterDserviceSsoPageLogin(payload: PayloadModel): Promise<GetUserInfoModel | null> {
-      try {
-        const { AccessToken: token } = payload;
-
-        // save token
-        this.setToken(token);
-        //TBD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        return this.afterDserviceSsoPageLoginAction(false);
-      } catch (error) {
-        return Promise.reject(error);
-      }
-    },
-    /**
-     * @description: dservice页面跳转登录成功后的处理(用户信息和路由)
-     */
-    async afterDserviceSsoPageLoginAction(goHome?: boolean): Promise<GetUserInfoModel | null> {
-      //参考afterLoginAction进行重写
-      const userInfo = await getUserInfo();
-      return userInfo;
-    },
-
-    //#endregion
-
     async afterLoginAction(goHome?: boolean): Promise<GetUserInfoModel | null> {
       if (!this.getToken) return null;
       // get user info
@@ -166,6 +137,59 @@ export const useUserStore = defineStore({
       this.setUserInfo(userInfo);
       return userInfo;
     },
+
+    //#region dservice页面跳转登录成功后的处理
+
+    /**
+     * @description: dservice页面跳转登录成功后的处理(用户信息和路由)
+     */
+    async afterSsoPageLoginAction(payload: PayloadModel): Promise<GetUserInfoModel | null> {
+      try {
+        const { AccessToken: token } = payload;
+        // save token
+        this.setToken(token);
+        if (!this.getToken) return null;
+        // get user info
+        const userInfo = await this.getSsoPageUserInfoAction();
+
+        const sessionTimeout = this.sessionTimeout;
+        if (sessionTimeout) {
+          this.setSessionTimeout(false);
+        } else {
+          const permissionStore = usePermissionStore();
+          if (!permissionStore.isDynamicAddedRoute) {
+            const routes = await permissionStore.buildRoutesAction();
+            routes.forEach((route) => {
+              router.addRoute(route as unknown as RouteRecordRaw);
+            });
+            router.addRoute(PAGE_NOT_FOUND_ROUTE as unknown as RouteRecordRaw);
+            permissionStore.setDynamicAddedRoute(true);
+          }
+          
+          await router.replace(userInfo?.homePath || PageEnum.BASE_HOME);
+        }
+        return userInfo;
+      } catch (error) {
+        return Promise.reject(error);
+      }
+    },
+    async getSsoPageUserInfoAction(): Promise<UserInfo | null> {
+      if (!this.getToken) return null;
+      const userInfo = await getSsOPageUserInfo();
+      const { roles = [] } = userInfo;
+      if (isArray(roles)) {
+        const roleList = roles.map((item) => item.value) as RoleEnum[];
+        this.setRoleList(roleList);
+      } else {
+        userInfo.roles = [];
+        this.setRoleList([]);
+      }
+      debugger;
+      this.setUserInfo(userInfo);
+      return userInfo;
+    },
+    //#endregion
+
     /**
      * @description: logout
      */

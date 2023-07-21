@@ -11,7 +11,6 @@ export const useGlobSetting = (): Readonly<GlobConfig> => {
     VITE_GLOB_UAES_DOMAIN_LOGIN,
     VITE_GLOB_UAES_SSO_PAGE,
     VITE_GLOB_UAES_DSERVICE_APP_ID,
-    VITE_GLOB_UAES_DSERVICE_APP_DEV_KEY,
     VITE_GLOB_UAES_DSERVICE_APP_PROD_KEY
   } = getAppEnvConfig();
 
@@ -25,7 +24,6 @@ export const useGlobSetting = (): Readonly<GlobConfig> => {
     uaesDomainLogin: JSON.parse(VITE_GLOB_UAES_DOMAIN_LOGIN),
     uaesSsoPage: JSON.parse(VITE_GLOB_UAES_SSO_PAGE),
     uaesDserviceAppId: VITE_GLOB_UAES_DSERVICE_APP_ID,
-    uaesDserviceAppDevKey: VITE_GLOB_UAES_DSERVICE_APP_DEV_KEY,
     uaesDserviceAppProdKey: VITE_GLOB_UAES_DSERVICE_APP_PROD_KEY
   };
   return glob as Readonly<GlobConfig>;

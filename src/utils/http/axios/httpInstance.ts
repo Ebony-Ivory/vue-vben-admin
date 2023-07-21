@@ -25,7 +25,7 @@ export const downloadServiceHttp = createAxios({
 
 //WxP SSO服务
 export const authHttp = (() => {
-  if (globSetting?.uaesDomainLogin) {
+  if (globSetting?.uaesDomainLogin || globSetting?.uaesSsoPage) {
     return createAxios({
       requestOptions: {
         apiUrl: 'http://sso-be.wxp.dev.dservice.uaes.com',

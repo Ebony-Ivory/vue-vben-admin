@@ -154,7 +154,6 @@ export interface GlobConfig {
   //dservice app id
   uaesDserviceAppId: string;
   //dservice app key
-  uaesDserviceAppDevKey: string;
   uaesDserviceAppProdKey: string;
 }
 export interface GlobEnvConfig {
@@ -173,6 +172,5 @@ export interface GlobEnvConfig {
   //dservice app id
   VITE_GLOB_UAES_DSERVICE_APP_ID: string;
   //dservice app key
-  VITE_GLOB_UAES_DSERVICE_APP_DEV_KEY: string;
   VITE_GLOB_UAES_DSERVICE_APP_PROD_KEY: string;
 }

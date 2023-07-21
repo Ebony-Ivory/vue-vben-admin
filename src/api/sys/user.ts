@@ -10,6 +10,7 @@ enum Api {
   Login = '/login',
   Logout = '/logout',
   GetUserInfo = '/getUserInfo',
+  GetSsOPageUserInfo = '/user/getUserInfo',
   GetPermCode = '/getPermCode',
   TestRetry = '/testRetry',
 }
@@ -30,11 +31,21 @@ export function loginApi(params: LoginParams, mode: ErrorMessageMode = 'modal') 
 }
 
 /**
- * @description: getUserInfo
+ * @description: getUserInfo 适用于仅认证的接口
  */
 export function getUserInfo() {
   return authHttp.get<GetUserInfoModel>(
     { url: Api.GetUserInfo, params: { appId: uaesDserviceAppId } },
+    { errorMessageMode: 'none' },
+  );
+}
+
+/**
+ * @description: getUserInfo 适用于单点登录(页面跳转模式)的获取用户信息的接口
+ */
+export function getSsOPageUserInfo() {
+  return authHttp.get<GetUserInfoModel>(
+    { url: Api.GetSsOPageUserInfo, params: { appId: uaesDserviceAppId } },
     { errorMessageMode: 'none' },
   );
 }
