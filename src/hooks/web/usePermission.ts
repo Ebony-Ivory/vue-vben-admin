@@ -64,12 +64,20 @@ export function usePermission() {
     }
 
     const permMode = projectSetting.permissionMode;
-
+    // 添加白名单角色
+    const SUPER_ADMIN_ROLE: any = 'TefSysAdmin';
     if ([PermissionModeEnum.ROUTE_MAPPING, PermissionModeEnum.ROLE].includes(permMode)) {
       if (!isArray(value)) {
+        //白名单直接放行
+        if (userStore.getRoleList?.includes(SUPER_ADMIN_ROLE as RoleEnum)) {
+          return true;
+        }
         return userStore.getRoleList?.includes(value as RoleEnum);
       }
-      return (intersection(value, userStore.getRoleList) as RoleEnum[]).length > 0;
+      //添加白名单
+      return (
+        (intersection([SUPER_ADMIN_ROLE, ...value], userStore.getRoleList) as RoleEnum[]).length > 0
+      );
     }
 
     if (PermissionModeEnum.BACK === permMode) {

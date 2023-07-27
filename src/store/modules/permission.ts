@@ -123,8 +123,12 @@ export const usePermissionStore = defineStore({
         const { meta } = route;
         // 抽出角色
         const { roles } = meta || {};
+        //没设定角色直接放行
         if (!roles) return true;
         // 进行角色权限判断
+        // 添加白名单角色
+        const SUPER_ADMIN_ROLE: any = 'TefSysAdmin';
+        roles.push(SUPER_ADMIN_ROLE);
         return roleList.some((role) => roles.includes(role));
       };
 
