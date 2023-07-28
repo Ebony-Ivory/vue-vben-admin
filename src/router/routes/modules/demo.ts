@@ -24,6 +24,15 @@ const myRoute: AppRouteModule = {
       },
     },
     {
+      path: 'formTable',
+      name: 'FormTable',
+      component: () => import('/@/views/demo/formTable/index.vue'),
+      meta: {
+        icon: 'ph:table-bold',
+        title: 'TEF表格用例',
+      },
+    },
+    {
       path: 'vxetable',
       name: 'Vxetable',
       component: () => import('/@/views/demo/vxetable/index.vue'),
