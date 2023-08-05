@@ -10,40 +10,52 @@
 
       <template #bodyCell="{ column, record }">
         <template v-if="column.dataIndex === 'action'">
-          <TableAction
-            :actions="[
-              {
-                label: '新增',
-                icon: 'mdi:plus-box',
-                tooltip: '新增',
-                onClick: handleAdd.bind(null, record),
-              },
-
-              {
-                label: '更新(鉴权)',
-                icon: 'mdi:clipboard-edit',
-                tooltip: '更新(鉴权)',
-                //权限码
-                auth: ['super'],
-                onClick: handleEdit.bind(null, record),
-              },
-            ]"
-          />
+          <TableAction :actions="getActionItems(record)" />
         </template>
       </template>
     </BasicTable>
     <MyDrawer @register="registerMyDrawer" @success="handleMyDrawerSuccess"></MyDrawer>
   </div>
 </template>
+
 <script lang="ts" setup>
-  // import { ref, onBeforeMount, onMounted } from 'vue';
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
+  import { BasicTable, useTable, TableAction, ActionItem } from '/@/components/Table';
   import { getBasicColumns, getTableSearchFormConfig } from './config';
   import MyDrawer from './MyDrawer.vue';
   import { useDrawer } from '/@/components/Drawer';
   import { Button } from '/@/components/Button';
   import { useMessage } from '/@/hooks/web/useMessage';
   import { ImpExcel, ExcelData, jsonToSheetXlsx } from '/@/components/Excel';
+
+  function getActionItems(record): ActionItem[] {
+    return [
+      {
+        label: '新增',
+        icon: 'mdi:plus-box',
+        tooltip: '新增',
+        onClick: handleAdd.bind(null, record),
+      },
+      {
+        label: '更新',
+        icon: 'mdi:clipboard-edit',
+        tooltip: '更新',
+        onClick: handleEdit.bind(null, record),
+      },
+      {
+        label: '删除(鉴权)',
+        icon: 'ant-design:delete-outlined',
+        color: 'error',
+        tooltip: '删除(鉴权)',
+        //权限码
+        auth: ['xxxxxxxxxx'],
+        popConfirm: {
+          title: '是否确认删除',
+          confirm: handleDelete.bind(null, record),
+        },
+      },
+    ];
+  }
+
   const { createMessage: msg } = useMessage();
   const [registerTable, { reload }] = useTable({
     title: '这里填表格标题',
@@ -60,7 +72,7 @@
     rowKey: 'id',
     actionColumn: {
       width: 250,
-      title: '操作',
+      title: '操作(删除按钮鉴权)',
       dataIndex: 'action',
     },
   });
@@ -88,7 +100,10 @@
   }
   function handleEdit(record: Recordable) {
     console.log('🚀 🔶 handleEdit 🔶 record=>', record);
-    // openMyDrawer(true, record);
+  }
+
+  function handleDelete(record: Recordable) {
+    console.log('🚀 🔶 handleDelete 🔶 record=>', record);
   }
 
   // 导入处理
