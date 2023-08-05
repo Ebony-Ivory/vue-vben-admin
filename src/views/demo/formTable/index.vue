@@ -18,6 +18,15 @@
                 tooltip: '新增',
                 onClick: handleAdd.bind(null, record),
               },
+
+              {
+                label: '更新(鉴权)',
+                icon: 'mdi:clipboard-edit',
+                tooltip: '更新(鉴权)',
+                //权限码
+                auth: ['super'],
+                onClick: handleEdit.bind(null, record),
+              },
             ]"
           />
         </template>
@@ -76,6 +85,10 @@
 
   function handleAdd(record: Recordable) {
     openMyDrawer(true, record);
+  }
+  function handleEdit(record: Recordable) {
+    console.log('🚀 🔶 handleEdit 🔶 record=>', record);
+    // openMyDrawer(true, record);
   }
 
   // 导入处理
