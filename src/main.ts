@@ -16,6 +16,7 @@ import { router, setupRouter } from '@/router';
 import { setupRouterGuard } from '@/router/guard';
 import { setupStore } from '@/store';
 
+
 import App from './App.vue';
 
 async function bootstrap() {
@@ -57,7 +58,6 @@ async function bootstrap() {
 
   // https://next.router.vuejs.org/api/#isready
   // await router.isReady();
-
   app.mount('#app');
 }
 

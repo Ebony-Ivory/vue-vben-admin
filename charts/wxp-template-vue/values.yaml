@@ -21,6 +21,8 @@ env:
     PRO_API_HOST: api.example.com.cn
     PRO_LOCAL: true
     PRO_HTTP: http
+    ENV_VARIABLE1: '(yaml)运行时环境变量1'
+    ENV_VARIABLE2: '(yaml)运行时环境变量2'
 
 logs:
   parser: nginx

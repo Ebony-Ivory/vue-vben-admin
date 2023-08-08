@@ -100,6 +100,15 @@ const myRoute: AppRouteModule = {
         roles: ['wxp-template-vue.demo.authPage.page.view', 'xxxxxxxxxxx'],
       },
     },
+    {
+      path: 'variable',
+      name: 'Variable',
+      component: () => import('/@/views/demo/variable/index.vue'),
+      meta: {
+        icon: 'carbon:parameter',
+        title: '运行时变量',
+      },
+    },
   ],
 };
 
