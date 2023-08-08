@@ -9,12 +9,13 @@
       content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0"
     />
     <title><%= VITE_GLOB_APP_TITLE %></title>
-    <script>
+    <script type="module" src="/src/runtimeVar.ts"></script>
+    <!-- <script>
       window._env_ = {
         ENV_VARIABLE1: '(默认)运行时环境变量1',
         ENV_VARIABLE2: '(默认)运行时环境变量2',
       };
-    </script>
+    </script> -->
     <link rel="icon" href="/favicon.ico" />
   </head>
   <body>
