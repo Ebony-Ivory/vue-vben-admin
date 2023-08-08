@@ -9,6 +9,7 @@ COPY dist/  /usr/share/nginx/html/
 CMD ["nginx", "-g", "daemon off;"]
 
 # 添加运行时的环境变量
+COPY ./build /usr/share/nginx/html
 RUN chmod +x /usr/share/nginx/html/env.sh
 ENTRYPOINT ["/usr/share/nginx/html/env.sh"]
 
