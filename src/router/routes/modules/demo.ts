@@ -100,6 +100,25 @@ const myRoute: AppRouteModule = {
         roles: ['wxp-template-vue.demo.authPage.page.view', 'xxxxxxxxxxx'],
       },
     },
+
+    {
+      path: 'treeSample',
+      name: 'TreeSample',
+      component: () => import('/@/views/demo/treeSample/index.vue'),
+      meta: {
+        icon: 'mdi:file-tree-outline',
+        title: '树形控件',
+      },
+    },
+    {
+      path: 'treeSelect',
+      name: 'TreeSelect',
+      component: () => import('/@/views/demo/treeSelect/index.vue'),
+      meta: {
+        icon: 'mdi:file-tree-outline',
+        title: '树选择',
+      },
+    },
   ],
 };
 
