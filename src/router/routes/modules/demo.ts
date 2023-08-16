@@ -33,6 +33,15 @@ const myRoute: AppRouteModule = {
       },
     },
     {
+      path: 'formSample',
+      name: 'FormSample',
+      component: () => import('/@/views/demo/formSample/index.vue'),
+      meta: {
+        icon: 'ph:table-bold',
+        title: 'TEF表单用例',
+      },
+    },
+    {
       path: 'vxetable',
       name: 'Vxetable',
       component: () => import('/@/views/demo/vxetable/index.vue'),

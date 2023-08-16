@@ -59,7 +59,18 @@ export function getTableSearchFormConfig(): Partial<FormProps> {
           span: 6,
         },
       },
-
+      {
+        field: 'sDate',
+        component: 'DatePicker',
+        label: '单个日期',
+        colProps: {
+          span: 6,
+        },
+      
+        componentProps:{
+          valueFormat:'YYYY-MM-DD'
+        }
+      },
       {
         field: 'fieldTime',
         component: 'RangePicker',
