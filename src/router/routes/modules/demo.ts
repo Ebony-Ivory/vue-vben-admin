@@ -33,6 +33,15 @@ const myRoute: AppRouteModule = {
       },
     },
     {
+      path: 'formSample',
+      name: 'FormSample',
+      component: () => import('/@/views/demo/formSample/index.vue'),
+      meta: {
+        icon: 'ph:table-bold',
+        title: 'TEF表单用例',
+      },
+    },
+    {
       path: 'vxetable',
       name: 'Vxetable',
       component: () => import('/@/views/demo/vxetable/index.vue'),
@@ -88,7 +97,6 @@ const myRoute: AppRouteModule = {
         title: '多标签',
       },
     },
-
     {
       path: 'authPage',
       name: 'AuthPage',
@@ -107,6 +115,24 @@ const myRoute: AppRouteModule = {
       meta: {
         icon: 'carbon:parameter',
         title: '运行时变量',
+      },
+    },
+    {
+      path: 'treeSample',
+      name: 'TreeSample',
+      component: () => import('/@/views/demo/treeSample/index.vue'),
+      meta: {
+        icon: 'mdi:file-tree-outline',
+        title: '树形控件',
+      },
+    },
+    {
+      path: 'treeSelect',
+      name: 'TreeSelect',
+      component: () => import('/@/views/demo/treeSelect/index.vue'),
+      meta: {
+        icon: 'mdi:file-tree-outline',
+        title: '树选择',
       },
     },
   ],
