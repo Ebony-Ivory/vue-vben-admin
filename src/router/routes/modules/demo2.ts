@@ -19,7 +19,7 @@ const myRoute: AppRouteModule = {
       name: 'Vuetify',
       component: () => import('/@/views/demo2/vuetify/index.vue'),
       meta: {
-        icon: 'devicon-plain:vuetify',
+        icon: 'mdi:vuetify',
         title: 'Vuetify使用',
       },
     },
