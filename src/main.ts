@@ -2,6 +2,7 @@ import 'uno.css';
 import '@/design/index.less';
 import '@/components/VxeTable/src/css/index.scss';
 import 'ant-design-vue/dist/antd.less';
+import 'vuetify/styles';
 // Register icon sprite
 import 'virtual:svg-icons-register';
 
@@ -15,7 +16,6 @@ import { initAppConfigStore } from '@/logics/initAppConfig';
 import { router, setupRouter } from '@/router';
 import { setupRouterGuard } from '@/router/guard';
 import { setupStore } from '@/store';
-
 
 import App from './App.vue';
 

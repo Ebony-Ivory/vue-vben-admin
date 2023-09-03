@@ -119,6 +119,9 @@ importers:
       vuedraggable:
         specifier: ^4.1.0
         version: 4.1.0(vue@3.2.47)
+      vuetify:
+        specifier: 3.3.15
+        version: 3.3.15(typescript@5.0.3)(vue-i18n@9.2.2)(vue@3.2.47)
       vxe-table:
         specifier: ^4.3.11
         version: 4.3.11(vue@3.2.47)(xe-utils@3.5.7)
@@ -10001,6 +10004,30 @@ packages:
     dependencies:
       sortablejs: 1.14.0
       vue: 3.2.47
+    dev: false
+
+  /vuetify@3.3.15(typescript@5.0.3)(vue-i18n@9.2.2)(vue@3.2.47):
+    resolution: {integrity: sha512-n7GYBO31k8vA9UfvRwLNyBlkq1WoN3IJ9wNnIBFeV4axleSjFAzzR4WUw7rgj6Ba3q6N2hxXoyxJM21tseQTfQ==}
+    engines: {node: ^12.20 || >=14.13}
+    peerDependencies:
+      typescript: '>=4.7'
+      vite-plugin-vuetify: ^1.0.0-alpha.12
+      vue: ^3.2.0
+      vue-i18n: ^9.0.0
+      webpack-plugin-vuetify: ^2.0.0-alpha.11
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+      vite-plugin-vuetify:
+        optional: true
+      vue-i18n:
+        optional: true
+      webpack-plugin-vuetify:
+        optional: true
+    dependencies:
+      typescript: 5.0.3
+      vue: 3.2.47
+      vue-i18n: 9.2.2(vue@3.2.47)
     dev: false
 
   /vxe-table-plugin-export-xlsx@3.0.4(vxe-table@4.3.11):
