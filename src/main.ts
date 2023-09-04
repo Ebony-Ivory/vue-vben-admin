@@ -2,14 +2,13 @@ import 'uno.css';
 import '@/design/index.less';
 import '@/components/VxeTable/src/css/index.scss';
 import 'ant-design-vue/dist/antd.less';
-//vuetify样式文件
-import 'vuetify/styles';
 // Register icon sprite
 import 'virtual:svg-icons-register';
 
 import { createApp } from 'vue';
 
 import { registerGlobComp } from '@/components/registerGlobComp';
+import { installVuetify } from '@/components/Vuetify';
 import { setupGlobDirectives } from '@/directives';
 import { setupI18n } from '@/locales/setupI18n';
 import { setupErrorHandle } from '@/logics/error-handle';
@@ -34,6 +33,9 @@ async function bootstrap() {
   // Register global components
   // 注册全局组件
   registerGlobComp(app);
+
+  //install vuetify
+  installVuetify(app);
 
   // Multilingual configuration
   // 多语言配置
