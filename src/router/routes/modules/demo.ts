@@ -89,15 +89,6 @@ const myRoute: AppRouteModule = {
       },
     },
     {
-      path: 'multitab',
-      name: 'Multitab',
-      component: () => import('/@/views/demo/multitab/index.vue'),
-      meta: {
-        icon: 'typcn:tabs-outline',
-        title: '多标签',
-      },
-    },
-    {
       path: 'authPage',
       name: 'AuthPage',
       component: () => import('/@/views/demo/authPage/index.vue'),
