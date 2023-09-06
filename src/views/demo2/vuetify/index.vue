@@ -15,7 +15,7 @@
           tick-size="4"
         >
           <template v-slot:thumb-label="{ modelValue }">
-            <div class="i-mdi-snowflake"></div>
+            <VIcon theme="dark" :icon="icons[modelValue]"></VIcon>
           </template>
         </VRangeSlider>
       </VCard>
@@ -24,33 +24,44 @@
       <VCard title="进度条">
         <VDivider></VDivider>
         <div class="p-4">
-          <VProgressLinear model-value="10" color="light-blue" height="10" striped></VProgressLinear>
-        <br />
-        <VProgressLinear
-          model-value="20"
-          color="light-green-darken-4"
-          height="10"
-          striped
-        ></VProgressLinear>
-        <br />
-        <VProgressLinear model-value="45" height="10" striped color="lime"></VProgressLinear>
-        <br />
-        <VProgressLinear model-value="60" height="10" striped color="deep-orange"></VProgressLinear>
+          <VProgressLinear
+            model-value="10"
+            color="light-blue"
+            height="10"
+            striped
+          ></VProgressLinear>
+          <br />
+          <VProgressLinear
+            model-value="20"
+            color="light-green-darken-4"
+            height="10"
+            striped
+          ></VProgressLinear>
+          <br />
+          <VProgressLinear model-value="45" height="10" striped color="lime"></VProgressLinear>
+          <br />
+          <VProgressLinear
+            model-value="60"
+            height="10"
+            striped
+            color="deep-orange"
+          ></VProgressLinear>
         </div>
- 
       </VCard>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
   import { ref } from 'vue';
-  import { VRangeSlider, VProgressLinear, VCard, VDivider } from 'vuetify/components';
+  import { VRangeSlider, VProgressLinear, VCard, VDivider, VIcon } from 'vuetify/components';
   let seasons = ref({
     0: 'Winter',
     1: 'Spring',
     2: 'Summer',
     3: 'Fall',
   });
+
+  let icons = ref(['mdi-snowflake', 'mdi-leaf', 'mdi-fire', 'mdi-water']);
   const loading = ref(true);
   setTimeout(() => {
     loading.value = false;
