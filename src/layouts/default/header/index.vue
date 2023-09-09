@@ -1,5 +1,5 @@
 <template>
-  <Header :class="getHeaderClass" class="flex-wrap">
+  <Header :class="getHeaderClass" class="flex-wrap !h-full ps-0 pe-0">
     <!-- left start -->
     <div :class="`${prefixCls}-left`">
       <img class="float-left w-250px" :src="uaesBase64Logo" />
