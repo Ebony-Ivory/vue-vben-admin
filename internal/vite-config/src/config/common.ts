@@ -2,7 +2,7 @@ import { presetTypography, presetUno, presetIcons, transformerDirectives } from 
 import UnoCSS from 'unocss/vite';
 import { type UserConfig } from 'vite';
 
-const commonConfig: UserConfig = {
+const commonConfig: (mode: string) => UserConfig = (mode) => ({
   server: {
     host: true,
   },
@@ -28,6 +28,6 @@ const commonConfig: UserConfig = {
       },
     }),
   ],
-};
+});
 
 export { commonConfig };
