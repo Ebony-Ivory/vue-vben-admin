@@ -1,9 +1,9 @@
 <template>
-  <Header :class="getHeaderClass" class="flex-wrap !h-full ps-0 pe-0">
+  <Header :class="getHeaderClass" class="flex-wrap ps-0 pe-0">
     <!-- left start -->
     <div :class="`${prefixCls}-left`">
       <img class="float-left w-250px" :src="uaesBase64Logo" />
-      <Divider dashed type="vertical" class="!border-gray-400 !h-30px !border-width-1px"></Divider>
+      <Divider dashed type="vertical" class="header-divider"></Divider>
       <!-- logo -->
       <AppLogo
         v-if="getShowHeaderLogo || getIsMobile"
@@ -53,7 +53,7 @@
       <UserDropDown :theme="getHeaderTheme" />
 
       <SettingDrawer v-if="getShowSetting" :class="`${prefixCls}-action__item`" />
-      <Divider dashed type="vertical" class="!border-gray-400 !h-30px !border-width-1px"></Divider>
+      <Divider dashed type="vertical" class="header-divider"></Divider>
       <img class="float-right px-2" :src="boschBase64Logo" />
     </div>
 
@@ -215,4 +215,9 @@
 </script>
 <style lang="less">
   @import url('./index.less');
+
+  .header-divider {
+    height: @header-height - 12px;
+    border-inline: 1px dashed grey !important;
+  }
 </style>
