@@ -88,7 +88,7 @@
   import { useNow } from './useNow';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { LockOutlined } from '@ant-design/icons-vue';
-  import headerImg from '/@/assets/images/header.jpg';
+  // import headerImg from '/@/assets/images/header.jpg';
   import Icon from '@/components/Icon/Icon.vue';
   const InputPassword = Input.Password;
 
