@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BasicTable @register="registerTable">
+    <BasicTable @register="registerTable" @rowClick="doOnRowClick">
       <template #toolbar>
         <ImpExcel @success="handleImport" dateFormat="YYYY-MM-DD">
           <Button type="success">导入Excel</Button>
@@ -56,9 +56,14 @@
     ];
   }
 
+  //整行点击事件
+  //行内子元素点击事件需要停止传递
+  function doOnRowClick(rowData: Recordable, rowIndex: number, event: PointerEvent) {
+    console.log('🚀 doOnRowClick 🔶 rowData=>', rowData);
+  }
   const { createMessage: msg } = useMessage();
   const [registerTable, { reload }] = useTable({
-    title: '这里填表格标题',
+    title: '这里填表格标题(含整行点击事件)',
     api: getPageData,
     columns: getBasicColumns(),
     useSearchForm: true,
@@ -95,14 +100,20 @@
     reload();
   }
 
-  function handleAdd(record: Recordable) {
+  function handleAdd(record: Recordable, event: PointerEvent) {
+    //阻止整行点击事件
+    event.stopPropagation();
     openMyDrawer(true, record);
   }
-  function handleEdit(record: Recordable) {
+  function handleEdit(record: Recordable, event: PointerEvent) {
+    //阻止整行点击事件
+    event.stopPropagation();
     console.log('🚀 🔶 handleEdit 🔶 record=>', record);
   }
 
-  function handleDelete(record: Recordable) {
+  function handleDelete(record: Recordable, event: PointerEvent) {
+    //阻止整行点击事件
+    event.stopPropagation();
     console.log('🚀 🔶 handleDelete 🔶 record=>', record);
   }
 
