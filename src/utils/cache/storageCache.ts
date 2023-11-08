@@ -92,6 +92,21 @@ export const createStorage = ({
     }
 
     /**
+     * View cache
+     * @param {string} key
+     * @param {*} def
+     * @memberof Cache
+     */
+    view(key: string): any {
+      const val = this.storage.getItem(this.getKey(key));
+      if (!val) return '';
+
+      const decVal = this.hasEncrypt ? this.encryption.decryptByAES(val) : val;
+      const data = JSON.parse(decVal);
+      return data;
+    }
+
+    /**
      * Delete cache based on key
      * @param {string} key
      * @memberof Cache

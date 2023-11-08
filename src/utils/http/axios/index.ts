@@ -19,6 +19,7 @@ import { joinTimestamp, formatRequestDate } from './helper';
 import { useUserStoreWithOut } from '/@/store/modules/user';
 import { AxiosRetry } from '/@/utils/http/axios/axiosRetry';
 import axios from 'axios';
+import { judgeUaesFrontTimeout } from './frontTimeout';
 
 const globSetting = useGlobSetting();
 const urlPrefix = globSetting.urlPrefix;
@@ -161,6 +162,8 @@ const transform: AxiosTransform = {
         ? `${options.authenticationScheme} ${token}`
         : token;
     }
+    //前端判断超时时拦截
+    judgeUaesFrontTimeout(config);
     return config;
   },
 

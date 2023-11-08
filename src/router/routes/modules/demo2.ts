@@ -23,6 +23,15 @@ const myRoute: AppRouteModule = {
         title: 'Vuetify使用',
       },
     },
+    {
+      path: 'frontTimeout',
+      name: 'FrontTimeout',
+      component: () => import('/@/views/demo2/timeout/index.vue'),
+      meta: {
+        icon: 'ic:round-more-time',
+        title: '超时控制',
+      },
+    },
   ],
 };
 
