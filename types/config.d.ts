@@ -151,6 +151,8 @@ export interface GlobConfig {
   uaesDomainLogin: boolean;
   //是否启用联电的单点登录页面
   uaesSsoPage: boolean;
+  //是否启用由前端控制的登录超时
+  uaesFrontTimeout: boolean;
   //dservice app id
   uaesDserviceAppId: string;
   //dservice app key
@@ -169,6 +171,8 @@ export interface GlobEnvConfig {
   VITE_GLOB_UAES_DOMAIN_LOGIN: string;
   //是否启用联电的单点登录页面
   VITE_GLOB_UAES_SSO_PAGE: string;
+  //是否启用由前端的登录超时
+  VITE_GLOB_UAES_FRONT_TIMEOUT: string;
   //dservice app id
   VITE_GLOB_UAES_DSERVICE_APP_ID: string;
   //dservice app key

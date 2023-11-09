@@ -10,6 +10,7 @@ export const useGlobSetting = (): Readonly<GlobConfig> => {
     VITE_GLOB_UPLOAD_URL,
     VITE_GLOB_UAES_DOMAIN_LOGIN,
     VITE_GLOB_UAES_SSO_PAGE,
+    VITE_GLOB_UAES_FRONT_TIMEOUT,
     VITE_GLOB_UAES_DSERVICE_APP_ID,
     VITE_GLOB_UAES_DSERVICE_APP_PROD_KEY
   } = getAppEnvConfig();
@@ -23,6 +24,7 @@ export const useGlobSetting = (): Readonly<GlobConfig> => {
     uploadUrl: VITE_GLOB_UPLOAD_URL,
     uaesDomainLogin: JSON.parse(VITE_GLOB_UAES_DOMAIN_LOGIN),
     uaesSsoPage: JSON.parse(VITE_GLOB_UAES_SSO_PAGE),
+    uaesFrontTimeout: JSON.parse(VITE_GLOB_UAES_FRONT_TIMEOUT),
     uaesDserviceAppId: VITE_GLOB_UAES_DSERVICE_APP_ID,
     uaesDserviceAppProdKey: VITE_GLOB_UAES_DSERVICE_APP_PROD_KEY
   };

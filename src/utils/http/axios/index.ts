@@ -162,8 +162,10 @@ const transform: AxiosTransform = {
         ? `${options.authenticationScheme} ${token}`
         : token;
     }
-    //前端判断超时时拦截
-    judgeUaesFrontTimeout(config);
+    if (globSetting.uaesFrontTimeout) {
+      //前端判断超时时拦截
+      judgeUaesFrontTimeout(config);
+    }
     return config;
   },
 
