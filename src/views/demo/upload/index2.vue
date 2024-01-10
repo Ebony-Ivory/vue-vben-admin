@@ -34,8 +34,7 @@
   import { submitFileAndData } from '/@/api/demo/upload';
   import { FormSchema } from '/@/components/Table';
   import { ref } from 'vue';
-  // import { commit } from '/@/api/bcs/syncControllerApi';
-
+  // import { commit } from '/@/api/bcs/syncControllerApi';;
   const selectedFileList = ref<UploadProps['fileList']>([]);
 
   //form配置

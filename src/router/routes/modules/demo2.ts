@@ -32,6 +32,16 @@ const myRoute: AppRouteModule = {
         title: '超时控制',
       },
     },
+    {
+      path: 'keepAlivePage',
+      name: 'KeepAlivePage',
+      component: () => import('/@/views/demo2/alive/index.vue'),
+      meta: {
+        icon: 'material-symbols:push-pin-outline',
+        title: '标签保持',
+        ignoreKeepAlive: false,
+      },
+    },
   ],
 };
 
