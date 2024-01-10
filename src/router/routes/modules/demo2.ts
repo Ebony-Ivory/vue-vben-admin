@@ -38,7 +38,7 @@ const myRoute: AppRouteModule = {
       component: () => import('/@/views/demo2/alive/index.vue'),
       meta: {
         icon: 'material-symbols:push-pin-outline',
-        title: '标签保持',
+        title: '页面缓存',
         ignoreKeepAlive: false,
       },
     },
