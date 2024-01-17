@@ -38,8 +38,17 @@ const myRoute: AppRouteModule = {
       component: () => import('/@/views/demo2/alive/index.vue'),
       meta: {
         icon: 'material-symbols:push-pin-outline',
-        title: '页面缓存',
+        title: '标签页缓存',
         ignoreKeepAlive: false,
+      },
+    },
+    {
+      path: 'crossWeb',
+      name: 'CrossWeb',
+      component: () => import('/@/views/demo2/postMessage/index.vue'),
+      meta: {
+        icon: 'solar:round-transfer-vertical-linear',
+        title: '跨页面通讯',
       },
     },
   ],
