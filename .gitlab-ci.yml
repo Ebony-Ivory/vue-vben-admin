@@ -11,7 +11,9 @@ node_build:
     - node_module vben-base-master
     - node_build build
     - cp -r dist /cache/${CI_PROJECT_NAME}-${CI_PROJECT_ID}-${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHA}/dist
-
+  tags:
+  - front
+  
 docker_build:
   stage: docker_build
   script:
